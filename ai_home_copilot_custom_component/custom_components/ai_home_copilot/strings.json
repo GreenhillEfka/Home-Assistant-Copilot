@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "AI Home CoPilot",
+        "description": "Connect to the AI Home CoPilot Core add-on.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "token": "API token",
+          "test_light_entity_id": "Test light (for the toggle button)",
+          "watchdog_enabled": "Enable watchdog polling (fallback)",
+          "watchdog_interval_seconds": "Watchdog interval (seconds)",
+          "webhook_url": "Webhook URL (copy into Copilot-Core)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect"
+    }
+  }
+}

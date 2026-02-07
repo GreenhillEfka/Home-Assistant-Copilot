@@ -1,0 +1,11 @@
+{
+  "domain": "ai_home_copilot",
+  "name": "AI Home CoPilot",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://example.invalid/ai_home_copilot",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://example.invalid/ai_home_copilot/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
