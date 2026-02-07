@@ -14,6 +14,22 @@ node_modules/
 # Archives
 *.tgz
 
+# OpenClaw personal context (do not version)
+MEMORY.md
+USER.md
+SOUL.md
+TOOLS.md
+IDENTITY.md
+HEARTBEAT.md
+BOOTSTRAP.md
+PERPLEXITY.md
+BLUEPRINT_CoPilot_Addon_v0.1.md
+AGENTS.md
+memory/
+
+# Nested repos
+ha-copilot-repo/
+
 # Editor
 .vscode/
 .idea/
