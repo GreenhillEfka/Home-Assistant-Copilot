@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from dataclasses import asdict
 import json
 import logging
 
+from aiohttp.web import Response
+
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers import webhook
-from homeassistant.helpers.webhook import WebhookResponse
+from homeassistant.components import webhook
 
 from .api import CopilotStatus
 from .const import CONF_TOKEN, CONF_WEBHOOK_ID, DOMAIN, HEADER_AUTH
@@ -38,12 +38,12 @@ async def async_register_webhook(hass: HomeAssistant, entry, coordinator) -> str
 
         if token_expected and token_got != token_expected:
             _LOGGER.warning("Rejected webhook: invalid token")
-            return WebhookResponse(status=401)
+            return Response(status=401)
 
         try:
             payload = await request.json()
         except Exception:  # noqa: BLE001
-            return WebhookResponse(status=400)
+            return Response(status=400)
 
         # Accept either direct {online/version} or typed envelope.
         data = payload.get("data") if isinstance(payload, dict) else None
@@ -59,7 +59,11 @@ async def async_register_webhook(hass: HomeAssistant, entry, coordinator) -> str
         )
 
         coordinator.async_set_updated_data(status)
-        return WebhookResponse(status=200, body=json.dumps({"ok": True}).encode("utf-8"))
+        return Response(
+            status=200,
+            text=json.dumps({"ok": True}),
+            content_type="application/json",
+        )
 
     webhook.async_register(
         hass,
