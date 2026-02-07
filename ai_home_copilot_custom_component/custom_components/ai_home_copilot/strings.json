@@ -18,5 +18,11 @@
     "error": {
       "cannot_connect": "Failed to connect"
     }
+  },
+  "issues": {
+    "candidate_suggestion": {
+      "title": "CoPilot suggestion: {title}",
+      "description": "CoPilot found a reusable pattern and suggests turning it into an automation. Click Fix to confirm after you’ve created the automation via a blueprint."
+    }
   }
 }

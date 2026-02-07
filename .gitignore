@@ -11,6 +11,9 @@ node_modules/
 # Secrets
 *.env
 
+# Archives
+*.tgz
+
 # Editor
 .vscode/
 .idea/
