@@ -8,6 +8,7 @@
 ## Smart Home (Home Assistant)
 - Aktionen, die etwas schalten/ändern: **erst bestätigen lassen** („Ja“), Read-only geht sofort.
 - Bei Gruppen (z.B. Lichter): **immer Mitglieder/Segmente identifizieren und einzeln setzen**; Gruppen-State kann verzögert sein.
+- Zielbild (langfristig): Smart Home soll kontextsensitiv werden (äußere Einflüsse → Verhalten), dabei **stufenweise Autonomie** mit Sicherheits-/Freigabe-Levels.
 
 ## Integrationen (Stand 2026-02)
 - Telegram Bot: `@HomeClaw1_Bot` (DM-Pairing).
