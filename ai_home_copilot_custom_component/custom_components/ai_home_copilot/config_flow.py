@@ -53,7 +53,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 vol.Required(CONF_HOST, default=DEFAULT_HOST): str,
                 vol.Required(CONF_PORT, default=DEFAULT_PORT): int,
                 vol.Optional(CONF_TOKEN): str,
-                vol.Optional(CONF_TEST_LIGHT, default=DEFAULT_TEST_LIGHT): selector.EntitySelector(
+                vol.Optional(CONF_TEST_LIGHT): selector.EntitySelector(
                     selector.EntitySelectorConfig(domain="light")
                 ),
             }
@@ -93,7 +93,7 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                 vol.Optional(CONF_TOKEN, default=data.get(CONF_TOKEN, "")): str,
                 vol.Optional(
                     CONF_TEST_LIGHT,
-                    default=data.get(CONF_TEST_LIGHT, DEFAULT_TEST_LIGHT),
+                    default=data.get(CONF_TEST_LIGHT, ""),
                 ): selector.EntitySelector(selector.EntitySelectorConfig(domain="light")),
                 vol.Optional(
                     CONF_WATCHDOG_ENABLED,

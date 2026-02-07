@@ -4,7 +4,8 @@
   "codeowners": [],
   "config_flow": true,
   "documentation": "https://example.invalid/ai_home_copilot",
-  "iot_class": "local_polling",
+  "dependencies": ["webhook"],
+  "iot_class": "local_push",
   "issue_tracker": "https://example.invalid/ai_home_copilot/issues",
   "requirements": [],
   "version": "0.1.0"

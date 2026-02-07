@@ -15,10 +15,10 @@ Then restart Home Assistant.
 Settings → Devices & services → Add integration → **AI Home CoPilot**
 
 Config fields:
-- Host (default: 192.168.30.18)
-- Port (default: 8909)
+- Host (default: `homeassistant.local`) — set to your HA host LAN IP/hostname if needed
+- Port (default: `8909`)
 - API token (optional)
-- Light entity_id for test button (default: `light.deckenlicht`)
+- Light entity_id for test button (optional)
 
 Entities created:
 - `binary_sensor.ai_home_copilot_online`
