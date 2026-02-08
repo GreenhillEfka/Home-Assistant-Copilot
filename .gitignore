@@ -29,6 +29,7 @@ memory/
 
 # Nested repos
 ha-copilot-repo/
+ai_home_copilot_hacs_repo/
 
 # Editor
 .vscode/

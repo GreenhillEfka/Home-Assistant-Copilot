@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "started_at": "2026-02-08T06:18:00+01:00",
+  "until": "2026-02-08T10:18:00+01:00",
+  "runs": [
+    {
+      "ts": "2026-02-08T06:41:00+01:00",
+      "kind": "kickstart",
+      "branch": "dev/autopilot-2026-02-08-0641",
+      "result": "committed",
+      "summary": "Track Autopilot notes + Tag-System spec; ignore nested HACS repo checkout",
+      "artifacts": [
+        "docs/TAG_SYSTEM_v0.1.md",
+        "notes/autopilot_log.md",
+        "notes/autopilot_state.json",
+        "notes/* (alpha_worker + perplexity_audit + questions)"
+      ]
+    }
+  ],
+  "pending_questions": []
+}
