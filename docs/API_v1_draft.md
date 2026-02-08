@@ -44,6 +44,10 @@ Accept response (blueprint mapping):
 }
 ```
 
+## Brain Graph
+- `GET /api/v1/graph/state`
+- `GET /api/v1/graph/snapshot.svg`
+
 ## Synapses
 - `GET /api/v1/synapses?status=active|candidate`
 
