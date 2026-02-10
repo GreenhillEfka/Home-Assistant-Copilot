@@ -9,6 +9,7 @@ import logging
 from typing import Dict, Any, Optional, Callable, List
 from ..brain_graph.service import BrainGraphService
 from ..dev_surface.service import dev_surface
+from .envelope import get_envelope_processor
 
 logger = logging.getLogger(__name__)
 
@@ -39,22 +40,38 @@ class EventProcessor:
         Process a batch of events through all registered processors.
         
         Args:
-            events: List of normalized event dictionaries from EventStore
+            events: List of raw event dictionaries from EventStore
             
         Returns:
             Processing statistics
         """
+        envelope_processor = get_envelope_processor()
+        
         stats = {
             "processed": 0,
             "errors": 0,
-            "brain_graph_updates": 0
+            "brain_graph_updates": 0,
+            "normalized": 0,
+            "filtered": 0
         }
         
         for event in events:
             try:
+                # Normalize event through envelope processor
+                normalized_event = envelope_processor.normalize_event(event)
+                
+                if normalized_event is None:
+                    stats["filtered"] += 1
+                    continue
+                
+                stats["normalized"] += 1
+                
+                # Process normalized event through all processors
                 for processor in self.processors:
-                    processor(event)
+                    processor(normalized_event)
+                    
                 stats["processed"] += 1
+                
             except Exception as e:
                 logger.error(f"Error processing event {event.get('id', 'unknown')}: {e}")
                 dev_surface.error("event_processor", f"Failed to process event {event.get('id', 'unknown')}", error=e, context={"event": event})
@@ -64,7 +81,7 @@ class EventProcessor:
         dev_surface.increment_events_processed(stats["processed"])
         
         if stats["processed"] > 0:
-            dev_surface.debug("event_processor", f"Processed {stats['processed']} events successfully")
+            dev_surface.debug("event_processor", f"Processed {stats['processed']} events successfully (normalized: {stats['normalized']}, filtered: {stats['filtered']})")
         
         return stats
     
@@ -85,7 +102,7 @@ class EventProcessor:
             logger.error(f"Brain graph processing error for event {event.get('id')}: {e}")
     
     def _process_state_change_for_graph(self, event: Dict[str, Any]):
-        """Process state_changed events for brain graph."""
+        """Process normalized state_changed events for brain graph."""
         entity_id = event.get("entity_id", "")
         domain = event.get("domain", "")
         zone_id = event.get("zone_id")
@@ -96,16 +113,25 @@ class EventProcessor:
         # Create/touch entity node
         entity_label = entity_id.split(".")[-1].replace("_", " ").title()
         
-        node_meta = {}
+        node_meta = {
+            "envelope_version": event.get("v", 1),
+            "trigger": event.get("trigger", "unknown")
+        }
+        
         if zone_id:
             node_meta["zone_id"] = zone_id
             
-        # Get new state info if available  
+        # Get new state info from normalized envelope
         new_state = event.get("new", {})
         if new_state:
             state_value = new_state.get("state")
             if state_value:
                 node_meta["last_state"] = state_value
+            
+            # Store projected attributes (already filtered/redacted)
+            attrs = new_state.get("attrs", {})
+            if attrs:
+                node_meta.update(attrs)
         
         entity_node = self.brain_graph_service.touch_node(
             node_id=f"ha.entity:{entity_id}",
@@ -115,7 +141,7 @@ class EventProcessor:
             domain=domain,
             meta_patch=node_meta,
             source={"system": "ha", "event": "state_changed"},
-            tags=[f"domain:{domain}"]
+            tags=[f"domain:{domain}", f"trigger:{event.get('trigger', 'unknown')}"]
         )
         
         # Create zone node and link if zone_id exists
@@ -133,15 +159,15 @@ class EventProcessor:
             self.brain_graph_service.link(
                 from_node=entity_node.id,
                 to_node=zone_node.id,
-                edge_type="located_in",
+                edge_type="in_zone",
                 initial_weight=0.3
             )
     
     def _process_service_call_for_graph(self, event: Dict[str, Any]):
-        """Process call_service events for brain graph."""
+        """Process normalized call_service events for brain graph."""
         domain = event.get("domain", "")
         service = event.get("service", "")
-        entity_id = event.get("entity_id", "")
+        entity_ids = event.get("entity_ids", [])
         
         if not domain or not service:
             return
