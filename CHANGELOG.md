@@ -1,5 +1,37 @@
 # CHANGELOG - Home Assistant CoPilot Core Add-on
 
+## [0.4.8] - 2026-02-10
+
+### 🔍 Capabilities Discovery Endpoint (N3 Step Complete)
+
+Implementation of Core Add-on capabilities discovery for seamless HA Integration compatibility checking.
+
+#### Added
+- **Capabilities Endpoint** (`/api/v1/capabilities`):
+  - Core version and API compatibility information
+  - Feature flags for all supported capabilities
+  - Health indicators (uptime, last event, total processed events)
+  - Integration hints (batch sizes, supported domains, privacy domains)
+  - No authentication required for discovery
+  
+#### Features Reported
+- ✅ **Event envelope v1** - Privacy-first event processing
+- ✅ **Privacy redaction** - PII and sensitive data filtering  
+- ✅ **Zone enrichment** - Entity→zone mapping
+- ✅ **Candidate lifecycle** - Full suggestion management
+- ✅ **Brain Graph** - Activity correlation and visualization
+- ✅ **Habitus mining** - Habit detection from event patterns
+- 🚫 **Mood ranking** - Planned future feature
+- 🚫 **Energy analysis** - Planned future feature
+
+#### Integration Benefits
+- HA Integration can verify Core is reachable and healthy
+- Automatic feature detection prevents compatibility issues
+- Clear indicators of what data processing capabilities are active
+- Supports graceful degradation when Core Add-on is offline
+
+This completes the **N3 PROJECT_PLAN step**: "Capabilities ping and clear 'Core supports v1?' status"
+
 ## [0.4.7] - 2026-02-10
 
 ### 🔒 Privacy-First Event Envelope System

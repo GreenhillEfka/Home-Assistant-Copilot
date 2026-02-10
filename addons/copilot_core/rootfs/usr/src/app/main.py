@@ -10,6 +10,7 @@ from copilot_core.api.security import require_token
 from copilot_core.api.v1 import log_fixer_tx
 from copilot_core.api.v1 import tag_system
 from copilot_core.api.v1 import events_ingest
+from copilot_core.api.v1 import capabilities
 from copilot_core.api.v1.events_ingest import set_post_ingest_callback
 from copilot_core.brain_graph.api import brain_graph_bp, init_brain_graph_api
 from copilot_core.brain_graph.service import BrainGraphService
@@ -47,6 +48,7 @@ init_candidates_api(candidate_service)
 app.register_blueprint(log_fixer_tx.bp)
 app.register_blueprint(tag_system.bp)
 app.register_blueprint(events_ingest.bp)
+app.register_blueprint(capabilities.bp)
 app.register_blueprint(brain_graph_bp)
 app.register_blueprint(dev_surface_bp)
 app.register_blueprint(create_candidates_blueprint())
@@ -91,9 +93,10 @@ def index():
     return (
         "AI Home CoPilot Core (MVP)\n"
         "Endpoints: /health, /version, /api/v1/echo\n"
+        "Capabilities: /api/v1/capabilities (no auth required)\n"
         "Tag System: /api/v1/tag-system/tags, /assignments (CRUD: GET/POST/DELETE)\n"
         "Event Ingest: /api/v1/events (POST/GET), /api/v1/events/stats\n"
-        "Brain Graph: /api/v1/graph/state, /snapshot.svg, /stats, /prune\n"
+        "Brain Graph: /api/v1/brain-graph/state, /snapshot.svg, /stats, /prune\n"
         "Candidates: /api/v1/candidates (detection, accept/dismiss, stats)\n"
         "Dev: /api/v1/dev/logs (POST/GET)\n"
         "Pipeline: Events → EventProcessor → BrainGraph (real-time)\n"
