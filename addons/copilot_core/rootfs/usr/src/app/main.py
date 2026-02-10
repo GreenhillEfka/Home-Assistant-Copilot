@@ -11,6 +11,7 @@ from copilot_core.api.v1 import log_fixer_tx
 from copilot_core.api.v1 import tag_system
 from copilot_core.api.v1 import events_ingest
 from copilot_core.api.v1 import capabilities
+from copilot_core.api.v1 import dashboard
 from copilot_core.api.v1.events_ingest import set_post_ingest_callback
 from copilot_core.brain_graph.api import brain_graph_bp, init_brain_graph_api
 from copilot_core.brain_graph.service import BrainGraphService
@@ -44,6 +45,9 @@ set_post_ingest_callback(event_processor.process_events)
 candidate_service = CandidateService(brain_graph=brain_graph_service)
 init_candidates_api(candidate_service)
 
+# Initialize dashboard API
+dashboard.init_dashboard_api(brain_graph_service, candidate_service=candidate_service)
+
 # Register blueprints
 app.register_blueprint(log_fixer_tx.bp)
 app.register_blueprint(tag_system.bp)
@@ -52,6 +56,7 @@ app.register_blueprint(capabilities.bp)
 app.register_blueprint(brain_graph_bp)
 app.register_blueprint(dev_surface_bp)
 app.register_blueprint(create_candidates_blueprint())
+app.register_blueprint(dashboard.dashboard_bp)
 
 # In-memory ring buffer of recent dev logs.
 _DEV_LOG_CACHE: list[dict] = []
@@ -97,6 +102,7 @@ def index():
         "Tag System: /api/v1/tag-system/tags, /assignments (CRUD: GET/POST/DELETE)\n"
         "Event Ingest: /api/v1/events (POST/GET), /api/v1/events/stats\n"
         "Brain Graph: /api/v1/brain-graph/state, /snapshot.svg, /stats, /prune\n"
+        "Dashboard: /api/v1/dashboard/brain-summary, /quick-graph.svg\n"
         "Candidates: /api/v1/candidates (detection, accept/dismiss, stats)\n"
         "Dev: /api/v1/dev/logs (POST/GET)\n"
         "Pipeline: Events → EventProcessor → BrainGraph (real-time)\n"

@@ -1,5 +1,42 @@
 # CHANGELOG - Home Assistant CoPilot Core Add-on
 
+## [0.4.9] - 2026-02-10
+
+### 🧠 Brain Dashboard Summary API (N4 Enhancement)
+
+Enhanced Brain Graph dev surface with comprehensive dashboard endpoints for HA Integration display.
+
+#### Added
+- **Brain Dashboard Summary API** (`/api/v1/dashboard/brain-summary`):
+  - Consolidated health metrics: brain graph stats, 24h activity, candidate detection
+  - Health scoring algorithm (0-100) based on connectivity, activity level, system stability  
+  - Actionable recommendations for optimizing brain graph data collection
+  - Top entity activity tracking and trend analysis
+- **Quick Graph API** (`/api/v1/dashboard/quick-graph.svg`):
+  - Dashboard-optimized brain graph visualizations (small/medium/large sizes)
+  - Simplified rendering for embedded display in HA dashboards (20-80 nodes max)
+
+#### Enhanced
+- **N4 PROJECT_PLAN advancement** - Brain Graph dev surface now includes dashboard APIs
+- **Graceful degradation** in dashboard endpoints when services are unavailable
+- **Activity metrics** - 24-hour event and entity tracking for comprehensive health assessment
+
+#### Technical Implementation
+- Dashboard API integrates seamlessly with BrainGraphService, CandidateService, EventStore
+- Health score considers graph connectivity (edges/nodes ratio), recent activity, system stability
+- Size-specific rendering limits for dashboard widgets optimize performance
+
+#### Privacy & Performance
+- Dashboard data is aggregated and anonymized - no raw entity data exposure
+- Configurable rendering limits prevent resource exhaustion
+- All endpoints require API key authentication
+
+#### Quality Assurance
+- ✅ Full py_compile validation across all new modules
+- ✅ Backwards compatible with existing Brain Graph API endpoints  
+- ✅ Error handling with informative SVG fallbacks for rendering issues
+- ✅ Integration with existing API security framework
+
 ## [0.4.8] - 2026-02-10
 
 ### 🔍 Capabilities Discovery Endpoint (N3 Step Complete)
