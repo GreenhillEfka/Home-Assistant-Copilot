@@ -1,5 +1,39 @@
 # CHANGELOG - Home Assistant CoPilot Core Add-on
 
+## [0.4.6] - 2026-02-10
+
+### 📚 Brain Graph API Documentation & Capabilities
+
+Comprehensive documentation and capability announcement for the privacy-first knowledge graph system.
+
+#### Added
+- **Complete API Documentation** (`docs/brain_graph_api.md`):
+  - All REST endpoints: `/state`, `/snapshot`, `/stats`, `/prune`
+  - Data models: `GraphNode`, `GraphEdge` with full schemas
+  - Privacy & security features: automatic PII redaction, bounded storage
+  - Integration patterns: Event processing, Tag System, Automation Candidates
+  - Troubleshooting guide and configuration reference
+
+- **Enhanced README**: Updated with current system capabilities
+  - Brain Graph System: Privacy-first knowledge graph (500 nodes, 1500 edges)
+  - Tag System: AI-driven entity classification with CRUD API
+  - Automation Candidates: ML-based automation discovery
+  - Complete API endpoint reference
+
+#### Technical Foundation
+- **Privacy-First Design**: No raw HA attributes, automatic redaction patterns
+- **Bounded Architecture**: Configurable limits prevent resource exhaustion  
+- **Time Decay Model**: Exponential decay with 24h/12h half-life for nodes/edges
+- **Real-time Visualization**: SVG graph snapshots for operational insight
+- **Thread-Safe Operations**: Concurrent read/write support with SQLite backend
+
+#### Integration Ready
+- Brain Graph APIs fully documented for external tool integration
+- Establishes foundation for advanced AI automation workflows
+- Clear data models enable predictable graph interactions
+
+This release makes the Brain Graph system's capabilities transparent and accessible, completing the foundational documentation for the AI Home CoPilot's knowledge representation layer.
+
 ## [0.4.5] - 2026-02-10
 
 ### 🏷️ Tag System REST API - DELETE Operations
