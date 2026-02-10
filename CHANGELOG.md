@@ -1,107 +1,150 @@
-# CHANGELOG - AI Home CoPilot Core
+# CHANGELOG - Home Assistant CoPilot Core Add-on
+
+## [0.4.4] - 2026-02-10
+
+### 🤖 Candidates System - AI-Driven Automation Discovery
+
+Introduces comprehensive automation candidate detection and management system based on brain graph pattern analysis.
+
+#### Added
+- **Candidate Detection Service** (`CandidateService`): Main orchestration for automation pattern detection
+  - Privacy-first pattern detection from brain graph analysis
+  - Four detection algorithms: temporal, trigger-response, zone coordination, device following
+  - Configurable confidence thresholds and frequency requirements
+  - Bounded storage with auto-pruning (1000 candidate limit)
+
+- **Pattern Detection** (`PatternDetector`):
+  - **Temporal Patterns**: Recurring time-based activations (daily schedules)
+  - **Trigger-Response**: State change → service call correlations within time windows  
+  - **Zone Coordination**: Device co-activation patterns within areas/zones
+  - **Device Following**: Sequential device activations (light coordination)
+
+- **REST API** (`/api/v1/candidates/`):
+  - Detection triggers: `POST /detection/trigger`, `GET /detection/status`
+  - Candidate management: `GET /`, `GET /{id}`, `POST /{id}/accept`, `POST /{id}/dismiss`
+  - Analytics: `GET /high-confidence`, `GET /stats`
+  - Maintenance: `POST /maintenance/prune`, bulk operations
+
+- **Storage System** (`CandidateStore`):
+  - Thread-safe SQLite storage with bounded capacity
+  - Comprehensive filtering and query capabilities
+  - Deterministic candidate IDs for deduplication
+  - Automatic pruning of old dismissed candidates
+
+#### Privacy & Security
+- No PII stored in candidates (anonymized patterns only)
+- Bounded evidence metadata (1KB per evidence item)
+- Deterministic candidate IDs for stable deduplication
+- Privacy-bounded data models with automatic redaction
+
+#### Testing
+- 47 comprehensive unit tests covering all components
+- Privacy validation (metadata bounds, PII redaction)
+- Performance validation (bounded memory, efficient queries, thread safety)
+- Integrated into main.py with proper dependency injection
 
 ## [0.4.3] - 2026-02-10
 
-### Added
-- **Dev Surface Module** — comprehensive observability and debugging system
-  - **Structured logging service** with ring buffer (default: 500 entries), level filtering (DEBUG/INFO/WARN/ERROR)
-  - **JSONL persistence** to `/data/dev_logs.jsonl` for audit trail and debugging
-  - **Error tracking** with automatic counting by exception type, stack trace capture, most frequent error detection
-  - **System health monitoring** including memory usage, Brain Graph metrics, 24h event counts, overall status
-  - **REST API endpoints** at `/api/v1/dev/*`:
-    - `/logs` — retrieve recent logs with optional level filtering and limits
-    - `/errors` — error summary with counts and last error details
-    - `/health` — current system health snapshot
-    - `/diagnostics` — comprehensive system diagnostics export  
-    - `/clear` — reset all logs and counters
-  - **Event Processor integration** for automatic pipeline observability
-  - **10 comprehensive unit tests** covering all logging levels, error handling, persistence, health monitoring
-- **Dependencies**: Added `psutil==6.1.0` to Dockerfile for memory monitoring
+### 📊 Dev Surface - Structured Logging & System Health
 
-### Technical Details
-- Privacy-first: all logging is best-effort, failures never break main application flow
-- Non-intrusive design: no performance impact on core operations
-- Production-ready with proper error isolation and bounded memory usage
-- Complete integration with existing Event Processor and Brain Graph modules
-
-## [0.4.2] - 2026-02-10
-
-### Added
-- **Event Processing Pipeline** — completes the real-time data flow from HA → EventStore → BrainGraph
-  - `EventProcessor` bridges event ingest with Brain Graph service for automatic knowledge graph updates
-  - State changes create entity + zone nodes with `located_in` relationship edges
-  - Service calls create service nodes with `targets` edges to affected entities (higher salience for intentional actions)
-  - Post-ingest callback hook (non-blocking) enables pluggable downstream consumers
-  - `EventStore.ingest_batch` now returns accepted events for immediate downstream processing
-  - **11 new unit tests** (total: 76 across all Core modules)
-
-## [0.4.1] - 2026-02-10
-
-### Added
-- **Brain Graph Module** (`/api/v1/graph/*`): Complete knowledge representation system
-  - **`/api/v1/graph/state`**: JSON API for bounded graph state with filtering (kind, domain, center/hops, limits)
-  - **`/api/v1/graph/snapshot.svg`**: DOT/SVG visualization with themes (light/dark), layouts (dot/neato/fdp), hard render limits
-  - **`/api/v1/graph/stats`**: Graph statistics + configuration (node/edge counts, limits, decay parameters)
-  - **`/api/v1/graph/prune`**: Manual pruning trigger
-  - **Privacy-first storage**: PII redaction, bounded metadata (2KB max), automatic salience management
-  - **Exponential decay**: 24h half-life for nodes, 12h for edges with effective score calculation
-  - **SQLite backend**: Bounded capacity (500 nodes, 1500 edges), automatic pruning, neighborhood queries
-  - **HA event processing**: Hooks for state_changed and call_service events
-  - **Complete test coverage**: 27 unit tests covering privacy, bounds, decay, pruning, neighborhood queries
-- **Dependencies**: Added `graphviz` package to Dockerfile for SVG rendering
-
-### Technical Details
-- This establishes the central knowledge representation for entity/zone/device relationships
-- Privacy-first design with automatic PII redaction and bounded storage
-- No breaking changes, new endpoints accessible immediately
-- All compile checks and unit tests passing ✓
-
----
-
-## [0.4.0] - 2026-02-10
-
-### 🎉 Major Release: Tag System + Event Pipeline Foundation
-
-This release introduces the foundational data architecture for the AI Home CoPilot system.
+Added comprehensive observability and development tooling for Core system monitoring.
 
 #### Added
-- **Tag System Module** (`/api/v1/tag-system`): Complete privacy-first tag registry and assignment management
-  - Canonical tag definitions with multi-language support
-  - Persistent tag-assignment store with CRUD operations
-  - Subject validation (entity/device/area/automation/scene/script)
-  - Default tags: `aicp.kind.light`, `aicp.role.safety_critical`, `aicp.state.needs_repair`, `sys.debug.no_export`
+- **Dev Surface Service** (`DevSurfaceService`): Central observability with structured logging
+  - Ring buffer logging with configurable limits (500 entries default)
+  - Level filtering (DEBUG/INFO/WARN/ERROR) and persistent JSONL storage
+  - Error tracking with automatic counting by exception type
+  - System health snapshots with memory usage and Brain Graph metrics
 
-- **Event Ingest Pipeline** (`/api/v1/events`): HA→Core data forwarding infrastructure
-  - Bounded ring buffer with JSONL persistence
-  - Thread-safe deduplication with TTL-based cleanup
-  - Privacy-first validation and context ID truncation
-  - Query endpoints with domain/entity/zone/temporal filters
-  - Comprehensive statistics and diagnostics
+- **REST API** (`/api/v1/dev/`):
+  - `/logs` - Structured log retrieval with filtering
+  - `/errors` - Error statistics and most frequent errors
+  - `/health` - System health status (healthy/degraded/error)
+  - `/diagnostics` - Complete system diagnostics export
+  - `/clear` - Log and error state reset
 
-- **API Security**: Shared authentication helper for token-based endpoint protection
+- **Integration**:
+  - Automatic logging of Event Processor activities
+  - Error isolation from main processing pipeline
+  - Memory and performance monitoring via psutil
 
-#### Technical
-- **Dependencies**: Added PyYAML 6.0.1 for tag registry YAML parsing
-- **Storage**: Configurable paths via environment variables
-- **Testing**: 19+ unit tests covering core functionality (tag registry, event store, API validation)
+#### Testing
+- 10 comprehensive unit tests covering all logging functionality
+- Performance validation for ring buffer and level filtering
+- Health monitoring and diagnostics export validation
 
-#### Developer Notes
-- All tests passing ✓
-- Code compiles cleanly with `python3 -m compileall`
-- Ready for production deployment
-- Privacy-first design with automatic redaction policies
+## [0.4.2] - 2026-02-09
+
+### 🧠 Brain Graph Core Module
+
+Privacy-first knowledge graph system for entity relationships and pattern detection.
+
+#### Added
+- **Brain Graph Service** (`BrainGraphService`): Core knowledge graph with bounded storage
+  - Maximum 500 nodes, 1500 edges with automatic pruning
+  - Exponential decay scoring (24h half-life nodes, 12h edges)
+  - Privacy-first design with automatic PII redaction
+  - SQLite persistence with transaction support
+
+- **REST API** (`/api/v1/graph/`):
+  - `/state` - Complete graph export (nodes + edges)
+  - `/stats` - Node/edge counts and memory usage
+  - `/snapshot.svg` - Visual graph representation
+  - Node/edge CRUD operations with privacy validation
+
+- **Privacy Features**:
+  - Automatic redaction of sensitive data (GPS, tokens, URLs)
+  - Bounded node storage prevents memory bloat
+  - No long-term storage of raw event data
+
+#### Testing
+- 23 unit tests covering graph operations and privacy
+- Memory boundary validation
+- Privacy redaction verification
+
+## [0.4.1] - 2026-02-08
+
+### 🔄 Event Processing Pipeline
+
+Core event ingestion and processing system for Home Assistant integration.
+
+#### Added
+- **Event Processor** (`EventProcessorService`): Handles incoming HA events
+  - Schema validation for envelope format v1
+  - Deduplication with TTL-based cleanup (24h default)
+  - Privacy-first processing with sensitive data redaction
+  - Metrics and health monitoring
+
+- **REST API** (`/api/v1/events/`):
+  - `POST /ingest` - Event ingestion endpoint
+  - `GET /stats` - Processing statistics
+  - `GET /health` - Pipeline health status
+
+- **Core Infrastructure**:
+  - SQLite-based deduplication store
+  - Configurable batch processing
+  - Error handling and recovery mechanisms
+
+## [0.4.0] - 2026-02-08
+
+### 🎉 Initial MVP Release
+
+First functional release of CoPilot Core with basic API framework.
+
+#### Added
+- **Core Service Framework**: Basic FastAPI application structure
+- **Health Endpoints**: `/health`, `/version` for monitoring
+- **Authentication**: Token-based API protection
+- **Configuration**: Home Assistant Add-on integration
+- **Docker Support**: Multi-architecture builds (amd64, aarch64)
+
+#### Infrastructure
+- Home Assistant Add-on configuration with ingress support
+- Structured logging with configurable levels
+- Basic error handling and service lifecycle management
 
 ---
 
-## [0.1.1] - 2026-02-07
-
-### Added
-- Initial MVP scaffold with health endpoints
-- Basic service framework
-- Ingress configuration for web UI access
-
-## [0.1.0] - 2026-02-07
-
-### Added
-- Initial release
-- Core service foundations
+**Installation**: Available through Home Assistant Community Store (HACS)  
+**Repository**: https://github.com/GreenhillEfka/Home-Assistant-Copilot  
+**Documentation**: https://docs.openclaw.ai  
