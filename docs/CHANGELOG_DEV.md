@@ -4,7 +4,20 @@ Kurzliste von Änderungen im Branch `dev`, die noch nicht als Add-on Release get
 
 - Stable Releases: `CHANGELOG.md` (Tags `copilot_core-vX.Y.Z`).
 
-## Candidate: v0.4.2 (Event Processing Pipeline)
+## Candidate: v0.4.3 (Dev Surface Observability)
+
+### Dev Surface Module — Structured Logging & System Health (2026-02-10)
+- **`DevSurfaceService`** (`copilot_core/dev_surface/service.py`): Central observability service with structured logging, error tracking, and system health monitoring.
+- **Ring buffer logging** with configurable limits (default: 500 entries), level filtering (DEBUG/INFO/WARN/ERROR), and persistent JSONL file storage.
+- **Error tracking**: automatic counting by exception type, most frequent error detection, last error capture with stack traces.
+- **System health snapshots**: memory usage (via psutil), Brain Graph metrics (nodes/edges), events processed (24h), error rates, overall status (healthy/degraded/error).
+- **REST API** endpoints at `/api/v1/dev/*`: `/logs`, `/errors`, `/health`, `/diagnostics`, `/clear` — all token-protected.
+- **Integrated with Event Processor**: automatic logging of processing events, errors isolated from main pipeline.
+- **10 comprehensive unit tests** covering all logging levels, error tracking, ring buffer limits, level filtering, file persistence, system health, diagnostics export.
+- **Dependencies**: Added `psutil==6.1.0` to Dockerfile for memory monitoring.
+- **Non-intrusive**: All logging is best-effort; failures never break main application flow.
+
+## Released: v0.4.2 (Event Processing Pipeline)
 
 ### EventProcessor — EventStore → BrainGraph (2026-02-10)
 - **`EventProcessor`** (`copilot_core/ingest/event_processor.py`): Bridges event ingest with Brain Graph service. Processes ingested events in real-time to build the knowledge graph.
