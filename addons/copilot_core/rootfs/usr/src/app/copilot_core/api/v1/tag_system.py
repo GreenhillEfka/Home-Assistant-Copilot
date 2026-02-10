@@ -273,3 +273,58 @@ def assignments():
         ),
         201 if created else 200,
     )
+
+
+@bp.route("/assignments/<path:assignment_id>", methods=["DELETE"])
+def delete_assignment(assignment_id: str):
+    """Delete a specific tag assignment by ID."""
+    if not require_token(request):
+        return jsonify({"error": "unauthorized"}), 401
+
+    store = _load_assignments_store()
+    
+    # Check if assignment exists by attempting to remove it
+    # The remove method returns the count of actually removed items
+    removed_count = store.remove([assignment_id])
+    
+    if removed_count > 0:
+        return jsonify({
+            "ok": True,
+            "deleted": True,
+            "assignment_id": assignment_id
+        }), 200
+    else:
+        return jsonify({"error": "assignment_not_found", "assignment_id": assignment_id}), 404
+
+
+@bp.route("/assignments/batch", methods=["DELETE"])
+def delete_assignments_batch():
+    """Delete multiple tag assignments by IDs."""
+    if not require_token(request):
+        return jsonify({"error": "unauthorized"}), 401
+
+    store = _load_assignments_store()
+    payload = request.get_json(silent=True) or {}
+    
+    assignment_ids = payload.get("assignment_ids", [])
+    if not isinstance(assignment_ids, list) or not assignment_ids:
+        return jsonify({
+            "error": "invalid_payload", 
+            "detail": "assignment_ids must be a non-empty array"
+        }), 400
+
+    if len(assignment_ids) > 1000:  # Reasonable limit
+        return jsonify({
+            "error": "too_many_ids",
+            "detail": "Maximum 1000 assignment_ids allowed per batch"
+        }), 400
+
+    # Remove assignments
+    removed_count = store.remove(assignment_ids)
+    
+    return jsonify({
+        "ok": True,
+        "requested": len(assignment_ids),
+        "deleted": removed_count,
+        "not_found": len(assignment_ids) - removed_count
+    }), 200
