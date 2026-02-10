@@ -1,5 +1,36 @@
 # CHANGELOG - Home Assistant CoPilot Core Add-on
 
+## [0.4.5] - 2026-02-10
+
+### 🏷️ Tag System REST API - DELETE Operations
+
+Completes CRUD functionality for tag assignment management with deletion endpoints.
+
+#### Added
+- **Assignment Deletion** (`/api/v1/tag-system/assignments/<id>`): 
+  - `DELETE` endpoint for removing individual tag assignments
+  - Returns 404 if assignment not found, 200 with deletion confirmation if successful
+  - Privacy-safe: only deletes by exact assignment ID
+
+- **Batch Assignment Deletion** (`/api/v1/tag-system/assignments/batch`):
+  - `DELETE` endpoint for bulk removal of multiple assignments 
+  - JSON payload: `{"assignment_ids": ["id1", "id2", ...]}`
+  - Returns detailed statistics: requested count, actual deletions, not found count
+  - Bounded operations: maximum 1000 assignment IDs per batch request
+  - Resilient: partial success allowed (deletes existing, reports missing)
+
+#### Enhanced
+- **Complete CRUD**: Tag assignment API now supports full Create, Read, Update, Delete operations
+- **Test Coverage**: Comprehensive test suite for deletion scenarios including edge cases
+- **Error Handling**: Proper HTTP status codes and descriptive error messages
+
+#### Technical
+- Leverages existing `TagAssignmentStore.remove()` method for thread-safe deletion
+- Maintains data integrity and atomicity for batch operations
+- Consistent API patterns with existing endpoints (auth, error format, response structure)
+
+This completes the tag assignment management API, enabling full lifecycle control for AI-driven tagging workflows.
+
 ## [0.4.4] - 2026-02-10
 
 ### 🤖 Candidates System - AI-Driven Automation Discovery

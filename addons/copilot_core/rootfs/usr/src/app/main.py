@@ -91,7 +91,7 @@ def index():
     return (
         "AI Home CoPilot Core (MVP)\n"
         "Endpoints: /health, /version, /api/v1/echo\n"
-        "Tag System: /api/v1/tag-system/tags, /assignments (store)\n"
+        "Tag System: /api/v1/tag-system/tags, /assignments (CRUD: GET/POST/DELETE)\n"
         "Event Ingest: /api/v1/events (POST/GET), /api/v1/events/stats\n"
         "Brain Graph: /api/v1/graph/state, /snapshot.svg, /stats, /prune\n"
         "Candidates: /api/v1/candidates (detection, accept/dismiss, stats)\n"
