@@ -1,5 +1,39 @@
 # CHANGELOG - Home Assistant CoPilot Core Add-on
 
+## [0.4.7] - 2026-02-10
+
+### 🔒 Privacy-First Event Envelope System
+
+Complete implementation of Alpha Worker n3_forwarder_quality specification for stable, privacy-first event processing.
+
+#### Added
+- **EventEnvelope Processor** (`envelope.py`):
+  - Schema versioning with v=1 stable envelope format
+  - Privacy-first PII redaction (emails, IPs, phone numbers, URLs, GPS coords)
+  - Domain-specific attribute projection (light, climate, media_player, etc.)
+  - Context ID truncation (12 chars) for correlation without reversibility
+  - Zone enrichment support with configurable entity→zone mapping
+
+- **Enhanced Event Pipeline**:
+  - All events now normalized through envelope before BrainGraph processing
+  - Raw HA events never reach Core modules (decoupled from HA internals)
+  - Comprehensive test suite validates Alpha Worker specification compliance
+  - Better error tracking with normalization/filtering statistics
+
+#### Privacy & Security Improvements
+- **Always Redact**: `user_id`, `entity_picture`, `latitude`/`longitude`, tokens
+- **Attribute Filtering**: Only actionable attributes forwarded per domain
+- **Trigger Inference**: User/automation/unknown classification from context
+- **Bounded Metadata**: Max field sizes prevent data leaks
+
+#### Technical Details
+- **Breaking**: Events now use normalized envelope schema
+- **Backward Compatible**: v=1 schema supports evolution
+- **Zero Config**: Works out-of-box with sensible defaults
+- **Extensible**: Easy to add new domains and redaction rules
+
+Integration with existing Brain Graph, Tag System, and Automation Candidates unchanged.
+
 ## [0.4.6] - 2026-02-10
 
 ### 📚 Brain Graph API Documentation & Capabilities
