@@ -1,5 +1,29 @@
 # CHANGELOG - AI Home CoPilot Core
 
+## [0.4.3] - 2026-02-10
+
+### Added
+- **Dev Surface Module** — comprehensive observability and debugging system
+  - **Structured logging service** with ring buffer (default: 500 entries), level filtering (DEBUG/INFO/WARN/ERROR)
+  - **JSONL persistence** to `/data/dev_logs.jsonl` for audit trail and debugging
+  - **Error tracking** with automatic counting by exception type, stack trace capture, most frequent error detection
+  - **System health monitoring** including memory usage, Brain Graph metrics, 24h event counts, overall status
+  - **REST API endpoints** at `/api/v1/dev/*`:
+    - `/logs` — retrieve recent logs with optional level filtering and limits
+    - `/errors` — error summary with counts and last error details
+    - `/health` — current system health snapshot
+    - `/diagnostics` — comprehensive system diagnostics export  
+    - `/clear` — reset all logs and counters
+  - **Event Processor integration** for automatic pipeline observability
+  - **10 comprehensive unit tests** covering all logging levels, error handling, persistence, health monitoring
+- **Dependencies**: Added `psutil==6.1.0` to Dockerfile for memory monitoring
+
+### Technical Details
+- Privacy-first: all logging is best-effort, failures never break main application flow
+- Non-intrusive design: no performance impact on core operations
+- Production-ready with proper error isolation and bounded memory usage
+- Complete integration with existing Event Processor and Brain Graph modules
+
 ## [0.4.2] - 2026-02-10
 
 ### Added
