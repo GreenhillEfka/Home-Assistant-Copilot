@@ -4,7 +4,41 @@ Kurzliste von Änderungen im Branch `dev`, die noch nicht als Add-on Release get
 
 - Stable Releases: `CHANGELOG.md` (Tags `copilot_core-vX.Y.Z`).
 
-## Candidate: v0.4.3 (Dev Surface Observability)
+## Candidate: v0.4.4 (Candidates System - Automation Pattern Detection)
+
+### 🤖 Candidates Module — AI-Driven Automation Discovery (2026-02-10)
+
+**Core System**
+- **`CandidateService`** (`copilot_core/candidates/service.py`): Main orchestration service for automation candidate detection and lifecycle management. Integrates with brain graph for pattern analysis.
+- **`PatternDetector`** (`copilot_core/candidates/detector.py`): Privacy-first pattern detection from brain graph analysis. Four detection algorithms: temporal, trigger-response, zone coordination, and device following patterns.
+- **`CandidateStore`** (`copilot_core/candidates/store.py`): Thread-safe SQLite storage with bounded capacity (1000 candidates), auto-pruning, and comprehensive filtering.
+- **`Candidate Models`** (`copilot_core/candidates/models.py`): Privacy-bounded data models with evidence system (1KB metadata limits), blueprint generation, and deterministic IDs.
+
+**REST API** (`/api/v1/candidates/`)
+- Detection triggers: `POST /detection/trigger`, `GET /detection/status`
+- Candidate management: `GET /`, `GET /{id}`, `POST /{id}/accept`, `POST /{id}/dismiss`
+- Analytics: `GET /high-confidence`, `GET /stats`
+- Maintenance: `POST /maintenance/prune`, bulk operations
+
+**Testing & Quality**
+- 47 comprehensive unit tests covering all components
+- Privacy validation (metadata bounds, PII redaction, deterministic IDs)
+- Performance validation (bounded memory, efficient queries, thread safety)
+- Integrated into main.py with brain graph dependency injection
+
+**Detection Algorithms**
+1. **Temporal Patterns**: Recurring time-based activations (daily schedules)
+2. **Trigger-Response**: State change → service call correlations within time windows
+3. **Zone Coordination**: Device co-activation patterns within areas/zones
+4. **Device Following**: Sequential device activations (light coordination)
+
+**Privacy-First Design**
+- No PII stored in candidates (anonymized patterns only)
+- Bounded evidence metadata (1KB per evidence item)
+- Deterministic candidate IDs for deduplication
+- Configurable confidence thresholds and frequency requirements
+
+## Previously Released: v0.4.3 (Dev Surface Observability)
 
 ### Dev Surface Module — Structured Logging & System Health (2026-02-10)
 - **`DevSurfaceService`** (`copilot_core/dev_surface/service.py`): Central observability service with structured logging, error tracking, and system health monitoring.
