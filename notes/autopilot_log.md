@@ -9,45 +9,26 @@ This log is appended by the Autopilot cron.
 ## 2026-02-14 15:59 — Error Grouping (autopilot) — ✅ RELEASED
 
 ### What changed
-- **Error Grouping v0.6.5**: Improved error diagnostics with automatic grouping
-- Added error grouping based on exception type + operation
-- Tracks first_seen, last_seen, and occurrence count per group
-- New `get_error_groups(min_count)` method for recurring error analysis
-- Error groups included in `as_dict()` output
-
-### Example Output
-```json
-{
-  "error_groups": [
-    {
-      "group_key": "TimeoutError:ping",
-      "count": 5,
-      "first_seen": "2026-02-14T12:00:00Z",
-      "last_seen": "2026-02-14T12:05:00Z",
-      "sample_error": {
-        "error_key": "network",
-        "message": "Connection timeout",
-        "where": "ping"
-      }
-    }
-  ]
-}
-```
+- **Token UX verbessert (v0.6.6)**:
+  - Token-Feld zeigt nur neuen Token an (leer = bestehender Token wird behalten)
+  - Clear Token Checkbox hinzugefügt um Token explizit zu löschen
+  - Privacy: Token wird nicht mehr im Formular angezeigt wenn bereits gesetzt
+- Manifest.json korrigiert (war fälschlicherweise bei 0.3.2)
 
 ### Files changed
-- `custom_components/ai_home_copilot/core/modules/dev_surface.py` (ErrorDigest class enhanced)
-- `custom_components/ai_home_copilot/manifest.json` (version → 0.6.5)
-- `CHANGELOG.md` (+v0.6.5 entry)
+- `custom_components/ai_home_copilot/config_flow.py` (Token-Handling + Clear-Checkbox)
+- `custom_components/ai_home_copilot/manifest.json` (version → 0.6.6)
+- `CHANGELOG.md` (+v0.6.6 + v0.6.5 entries)
 
 ### Status
-- **✅ RELEASED**: https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.5
-- Branch: development
-- py_compile verified for dev_surface.py
+- **✅ RELEASED**: https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.6
+- Branch: wip/module-forwarder_quality/20260208-172947
+- py_compile verified
 
 ### Next logical step
-- **User Antworten auf P1 Fragen abwarten** (Tag System decisions)
-- ODER: Token/OptionsFlow UX Verbesserungen
-- ODER: Weitere Error Handling Verbesserungen
+- **User Antworten auf P0/P1 Fragen** (Tag System decisions)
+- ODER: Tag System v0.2 Implementierung (basierend auf Decision Matrix Empfehlungen)
+- ODER: Testing Suite v0.3 (erweiterte Integration Tests)
 
 
 ## 2026-02-14 15:39 — Testing Suite v0.2 (autopilot) — ✅ RELEASED

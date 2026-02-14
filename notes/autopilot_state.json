@@ -1,93 +1,15 @@
 {
   "version": 1,
-  "started_at": "2026-02-08T06:18:00+01:00",
-  "until": "2026-02-08T10:18:00+01:00",
+  "started_at": "2026-02-14T16:00:00+01:00",
+  "until": "2026-02-14T20:00:00+01:00",
   "runs": [
     {
-      "ts": "2026-02-08T06:41:00+01:00",
-      "kind": "kickstart",
-      "branch": "dev/autopilot-2026-02-08-0641",
-      "result": "committed",
-      "summary": "Track Autopilot notes + Tag-System spec; ignore nested HACS repo checkout"
-    },
-    {
-      "ts": "2026-02-14T13:30:00+01:00",
-      "kind": "consistency_fix",
-      "branch": "release/v0.4.1",
-      "result": "committed",
-      "summary": "Consistency fix: init_energy_api naming pattern"
-    },
-    {
-      "ts": "2026-02-14T13:50:00+01:00",
-      "kind": "feature_add",
-      "branch": "release/v0.4.1",
+      "ts": "2026-02-14T16:09:00+01:00",
+      "kind": "ux_improvement",
+      "branch": "wip/module-forwarder_quality/20260208-172947",
       "result": "released",
-      "summary": "Brain Graph configurable limits (v0.4.12)",
-      "release_url": "https://github.com/GreenhillEfka/Home-Assistant-Copilot/releases/tag/v0.4.12"
-    },
-    {
-      "ts": "2026-02-14T13:49:00+01:00",
-      "kind": "feature_add",
-      "branch": "release/v0.4.1",
-      "result": "released",
-      "summary": "UniFi + Energy Neurons release (v0.4.13)",
-      "release_url": "https://github.com/GreenhillEfka/Home-Assistant-Copilot/releases/tag/v0.4.13"
-    },
-    {
-      "ts": "2026-02-14T13:59:00+01:00",
-      "kind": "consistency_fix",
-      "branch": "main",
-      "result": "released",
-      "summary": "Energy Context Module — Connect Core Energy Neuron to HA Integration (v0.5.9)",
-      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.5.9"
-    },
-    {
-      "ts": "2026-02-14T14:29:00+01:00",
-      "kind": "feature_add",
-      "branch": "dev/autopilot-debug-level-v0.6.0",
-      "result": "released",
-      "summary": "Debug Level Control (v0.6.0)",
-      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.0"
-    },
-    {
-      "ts": "2026-02-14T14:39:00+01:00",
-      "kind": "feature_add",
-      "branch": "development",
-      "result": "released",
-      "summary": "UniFi Context Module — Connect Core UniFi Neuron to HA Integration (v0.6.1)",
-      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.1"
-    },
-    {
-      "ts": "2026-02-14T15:19:00+01:00",
-      "kind": "feature_add",
-      "branch": "development",
-      "result": "released",
-      "summary": "Weather Context Module — PV forecasting integration (v0.6.2)",
-      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.2"
-    },
-    {
-      "ts": "2026-02-14T15:29:00+01:00",
-      "kind": "testing_enhancement",
-      "branch": "development",
-      "result": "released",
-      "summary": "Testing Suite v0.1.1 — Weather Context Tests (v0.6.3)",
-      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.3"
-    },
-    {
-      "ts": "2026-02-14T15:39:00+01:00",
-      "kind": "testing_enhancement",
-      "branch": "development",
-      "result": "released",
-      "summary": "Testing Suite v0.2 — Production-Ready Integration Tests (v0.6.4)",
-      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.4"
-    },
-    {
-      "ts": "2026-02-14T15:59:00+01:00",
-      "kind": "feature_add",
-      "branch": "development",
-      "result": "released",
-      "summary": "Error Grouping — Improved Error Diagnostics (v0.6.5)",
-      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.5"
+      "summary": "Token UX verbessert (v0.6.6)",
+      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.6"
     }
   ],
   "pending_questions": [
