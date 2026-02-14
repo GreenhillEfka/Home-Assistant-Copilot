@@ -6,6 +6,89 @@ This log is appended by the Autopilot cron.
 
 ---
 
+## 2026-02-14 15:19 — Weather Context Module v0.6.2 (autopilot) — ✅ RELEASED
+
+### What changed
+- **Weather Context Module v0.6.2**: PV forecasting integration for energy optimization
+- **7 new sensor entities** for weather & PV data:
+  - `sensor.ai_home_copilot_weather_condition` (sunny, cloudy, rainy, etc.)
+  - `sensor.ai_home_copilot_weather_temperature` (°C)
+  - `sensor.ai_home_copilot_weather_cloud_cover` (%)
+  - `sensor.ai_home_copilot_weather_uv_index` (UV)
+  - `sensor.ai_home_copilot_pv_forecast_kwh` (today's PV production forecast)
+  - `sensor.ai_home_copilot_pv_recommendation` (optimal_charging, moderate_usage, etc.)
+  - `sensor.ai_home_copilot_pv_surplus_kwh` (expected surplus after home consumption)
+- Connects to Core Add-on Weather service API (`/api/v1/weather`)
+
+### Files changed
+- `custom_components/ai_home_copilot/weather_context.py` (coordinator + data classes)
+- `custom_components/ai_home_copilot/weather_context_entities.py` (7 entities)
+- `custom_components/ai_home_copilot/core/modules/weather_context_module.py` (module)
+- `custom_components/ai_home_copilot/__init__.py` (+weather_context registration)
+- `custom_components/ai_home_copilot/manifest.json` (version → 0.6.2)
+- `CHANGELOG.md` (+v0.6.2 entry)
+
+### Status
+- **✅ RELEASED**: https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.2
+- Branch: development (merged from feature/weather-context-v0.6.2)
+- Py_compile verified for all new modules
+
+### Next logical step
+- Testing Suite v0.1 implementieren (P0)
+- **OR**: User answers to pending P1 questions (Tag System decisions)
+
+### What changed
+- **Testing Suite v0.1** stub angelegt für HA Integration
+- Tests abgedeckt:
+  - **Candidate Poller**: Entity Change Detection
+  - **Repairs Workflow**: Suggestion Handling
+  - **Decision Sync**: Core ↔ HA State Consistency
+  - **Context Modules**: Energy + UniFi Integration Tests
+- py_compile verified für alle neuen Test-Dateien
+
+### Files changed
+- `custom_components/ai_home_copilot/tests/__init__.py` (package marker)
+- `custom_components/ai_home_copilot/tests/test_suite_v01.py` (208 lines, 5 test classes)
+
+### Status
+- **✅ COMMITTED + PUSHED**: bdfaae5
+- Branch: development
+- No release (Stub/Foundation — Testing Suite v0.1 incomplete)
+
+### Next logical step
+- **User Antworten auf P0/P1/P2 Fragen** (bestehende pending questions)
+- ODER: Tag System v0.2 Implementierung (basierend auf Decision Matrix Empfehlungen)
+- ODER: Weather Integration für PV forecasting (Energy Module follow-up)
+
+---
+
+## 2026-02-14 14:49 — Questions Enriched with Decision Matrix (autopilot)
+
+### What changed
+- **questions_for_user_next_time.md** restructured with P0/P1/P2 priority system
+- Integrated Decision Matrix Run #7 recommendations:
+  - P0: Testing Suite v0.1 (empfohlen: JA)
+  - P1: Tag System decisions mit klaren Empfehlungen
+  - P2: Energy Module (geblockt durch P0-P1)
+
+### Files changed
+- `notes/questions_for_user_next_time.md` (enriched with guidance)
+- `notes/autopilot_state.json` (new run entry)
+- `notes/debug_level_worker_report_latest.md` (unchanged)
+- `notes/module_kernel_state.json` (unchanged)
+
+### Status
+- **✅ COMMITTED**: d37d285
+- Branch: master
+- No release (docs-only change)
+
+### Next logical step
+- **User Antworten auf P0/P1/P2 Fragen abwarten**
+- Dann: Testing Suite v0.1 implementieren (P0) → ODER
+- Weather Integration für PV forecasting (Energy follow-up)
+
+---
+
 ## 2026-02-14 14:39 — UniFi Context Module Release (autopilot)
 
 ### What changed

@@ -1,12 +1,15 @@
 # Fragen / Klärungen (autopilot Run 14:49)
 
 > ⚠️ **Entscheidungspriorität**: P0 (Testing Suite) → P1 (TAG_SYSTEM v0.2) → P2 (Energy Module)
+>
+> **Update 2026-02-14 14:59**: Testing Suite v0.1 Stub angelegt (Tests für Candidate Poller, Repairs, Decision Sync). P0 teilweise adressiert — vollständige Implementierung folgt nach P1 Entscheidungen.
 
 ---
 
 ## P0 — Testing Suite (vorrangig)
 
 ### 1. Testing Suite für Production-Deployment
+**Status**: ✅ Stub implementiert (2026-02-14 14:59)
 **Empfehlung (Decision Matrix Run #7):** ✅ **JA — Testing Suite v0.1 implementieren**
 
 | Option | Aufwand | Wert |

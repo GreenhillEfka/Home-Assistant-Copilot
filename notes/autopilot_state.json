@@ -58,11 +58,12 @@
       "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.1"
     },
     {
-      "ts": "2026-02-14T14:49:00+01:00",
-      "kind": "questions_update",
-      "branch": "master",
-      "result": "committed",
-      "summary": "Enrich questions_for_user_next_time.md with Decision Matrix recommendations (P0/P1/P2 structure, Tag System guidance)"
+      "ts": "2026-02-14T15:19:00+01:00",
+      "kind": "feature_add",
+      "branch": "development",
+      "result": "released",
+      "summary": "Weather Context Module — PV forecasting integration (v0.6.2)",
+      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.2"
     }
   ],
   "pending_questions": [
