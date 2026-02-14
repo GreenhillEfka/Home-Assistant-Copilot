@@ -1,6 +1,6 @@
 # Core Add-on - Entwicklungs-Index
 
-## 🎯 Status: v0.4.15 (Sync mit HA Integration v0.7.3)
+## 🎯 Status: v0.4.15 (Sync mit HA Integration v0.7.3) - 2026-02-15 00:48
 
 ---
 
@@ -54,6 +54,8 @@
 |------|--------|------|
 | **Habitus Zones v2** - Zone-aware pattern mining | ✅ Done | 2026-02-14 |
 | **Graph Candidates Bridge** - Link graph patterns to candidate lifecycle | ✅ Done | 2026-02-14 |
+| **SystemHealth/UniFi/Energy Neurons** | ✅ Done | 2026-02-14 |
+| **Tag System v0.2** - Decision Matrix + HA Labels | ✅ Done | 2026-02-14 |
 
 ---
 
@@ -91,4 +93,4 @@ Beide Repos sind vollständig synchronisiert mit Habitus Zones v2.
 
 ---
 
-*Letzte Aktualisierung: 2026-02-14*
+*Letzte Aktualisierung: 2026-02-15 00:48*
