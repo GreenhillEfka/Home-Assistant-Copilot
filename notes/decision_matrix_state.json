@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "lastRun": "2026-02-14T13:10:00+01:00",
+  "lastRun": "2026-02-14T14:20:00+01:00",
   "lastOutput": "notes/decision_matrix_latest.md",
-  "runs": 6,
-  "summary": "Keine neuen Fragen. Matrix unverändert. Offene Entscheidungen: 3 (Testing Suite, TAG_SYSTEM v0.2 offene Punkte, Energy Module Konfiguration). User-Input weiterhin benötigt für P0-P2 Items.",
+  "runs": 7,
+  "summary": "Keine neuen Fragen seit Run #6. Matrix unverändert (Timestamps aktualisiert). Offene Entscheidungen: 3 (Testing Suite, TAG_SYSTEM v0.2 offene Punkte, Energy Module Konfiguration). User-Input weiterhin benötigt für P0-P2 Items.",
   "openBlockers": 1,
   "decisionsReady": 3
 }

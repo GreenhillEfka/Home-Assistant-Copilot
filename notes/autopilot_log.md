@@ -6,6 +6,34 @@ This log is appended by the Autopilot cron.
 
 ---
 
+## 2026-02-14 14:29 — Debug Level Control Release (autopilot)
+
+### What changed
+- **Debug Level Control (v0.6.0)** released for HA Integration
+- New select entity: Debug Level (off/light/full)
+- New services: `set_debug_level`, `clear_all_logs`
+- Integrated with DevSurfaceModule devlog system
+- Config options added in const.py
+
+### Files changed
+- `custom_components/ai_home_copilot/const.py` (+DEBUG_LEVEL constants)
+- `custom_components/ai_home_copilot/select.py` (+DiagnosticLevelSelectEntity)
+- `custom_components/ai_home_copilot/core/modules/dev_surface.py` (+services)
+- `custom_components/ai_home_copilot/manifest.json` (version → 0.6.0)
+- `CHANGELOG.md` (+v0.6.0 entry)
+
+### Status
+- **✅ RELEASED**: https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.0
+- All py_compile checks passed
+- Branch pushed: `dev/autopilot-debug-level-v0.6.0`
+
+### Next logical step
+- UniFi Context Module (connect UniFi Neuron to HA)
+- Or: Weather integration for PV forecasting
+- Or: Tag System implementation (pending user answers)
+
+---
+
 ## 2026-02-08 06:41 — Kickstart (manual)
 
 ### What changed
@@ -77,3 +105,64 @@ This log is appended by the Autopilot cron.
 - HA Integration module (HACS repo): Connect core neurons to HA entities/events
 - Or: Implement Tag System CRUD API (pending user answers to 12 questions)
 - Or: Weather integration for PV forecasting (energy follow-up)
+
+---
+
+## 2026-02-14 14:15 — Energy Context Module Release (autopilot)
+
+### What changed
+- **Released Energy Context Module v0.5.9**: Connected Core Energy Neuron to HA Integration
+- **6 new sensor entities** for energy monitoring:
+  - Consumption/production today (kWh)
+  - Current power (W)
+  - Anomalies count + alert binary sensor
+  - Shifting opportunities count
+- Connects Core's anomaly detection and load-shifting suggestions to HA Repairs
+
+### Files changed
+- `custom_components/ai_home_copilot/energy_context.py` (+coordinator)
+- `custom_components/ai_home_copilot/energy_context_entities.py` (+entities)
+- `custom_components/ai_home_copilot/core/modules/energy_context_module.py` (+module)
+- `custom_components/ai_home_copilot/__init__.py` (+registration)
+- `custom_components/ai_home_copilot/manifest.json` (0.5.9)
+- `CHANGELOG.md` (+v0.5.9 entry)
+
+### Status
+- **✅ RELEASED**: https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.5.9
+- py_compile verified for all modules
+- Commit pushed to main (159bd15)
+- Tag v0.5.9 created and pushed
+
+### Next logical step
+- UniFi Context Module (similar pattern for UniFi Neuron)
+- Or: Weather integration for PV forecasting (energy follow-up)
+- Or: Tag System implementation (pending user answers)
+
+---
+
+## 2026-02-14 14:19 — Autopilot PAUSED (Window Expired)
+
+### Status
+- **🛑 Window expired** (ended 2026-02-08 10:18 → now 2026-02-14 14:19)
+- Autopilot paused until manually reactivated
+
+### Current State (from last run)
+- ✅ Energy Context Module released (v0.5.9)
+- ✅ UniFi + Energy Neurons released (v0.4.13)
+- ✅ Brain Graph Limits released (v0.4.12)
+- ⏳ Tag System pending (10 questions from user)
+
+### Pending Questions (still open)
+1. HA-Labels: Always materialize or selective (`role.*`, `state.*`)?
+2. Subjects v0.1: `entity`/`device`/`area` only, or more?
+3. Subject IDs: `entity_id` or Registry IDs (`unique_id`/`device_id`)?
+4. Namespace: `user.*` allowed, or only HA Labels import?
+5. Localization: `display.de` + `en` only, or full i18n from start?
+6. Learned Tags: Auto-materialize as HA Labels or explicit confirm only?
+7. Colors/Icons: Central registry or HA as UI source?
+8. Conflicts: How to handle existing HA labels without `aicp.*` namespace?
+9. Habitus Zones: Own objects or pure tagging?
+10. Migration: Legacy configs to collect or start fresh?
+
+### To Resume
+Manually trigger a new autopilot window or run with fresh parameters.
