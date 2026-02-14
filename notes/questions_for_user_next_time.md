@@ -1,14 +1,108 @@
-# Fragen / Klärungen (beim nächsten Online-Sein)
+# Fragen / Klärungen (autopilot Run 14:49)
 
-(Autopilot sammelt hier Rückfragen; nichts davon ist dringend.)
+> ⚠️ **Entscheidungspriorität**: P0 (Testing Suite) → P1 (TAG_SYSTEM v0.2) → P2 (Energy Module)
 
-- Wollen wir AICoPilot-Tags **immer** als HA-Labels materialisieren (Default: ja), oder nur für ausgewählte Facetten (z. B. `role.*`, `state.*`)?
-- Welche **Subjects** sollen v0.1 unterstützen: nur `entity` + `device` + `area`, oder auch `automation/scene/script/helper` (HA kann Labels dafür im UI)?
-- Sollen wir als interne Referenz für Subjects primär `entity_id` verwenden oder lieber Registry-IDs/`unique_id`/`device_id` (stabiler bei Rename)?
-- Namespace-Policy: Ist `user.*` gewünscht (Nutzer definieren eigene Tags), oder sollen Nutzer nur über HA-Labels arbeiten und AICoPilot importiert sie optional?
-- Lokalisierung: Reicht `display.de` (und später `en`), oder sollen wir von Anfang an i18n-konform arbeiten?
-- Learned/Candidate Tags: Dürfen die jemals automatisch als HA-Label erscheinen, oder nur nach expliziter Bestätigung (empfohlen: nur nach Bestätigung)?
-- Farben/Icons: Wollen wir (a) zentral im Tag-Registry-Objekt pflegen und nach HA syncen, oder (b) HA als UI-Quelle akzeptieren und nur IDs synchron halten?
-- Konflikte/Duplikate: Wie sollen wir umgehen, wenn ein Nutzer schon ein HA-Label „Sicherheitskritisch“ hat, aber ohne `aicp.*` Namespace?
-- Habitus-Zonen: Sollen diese als eigene interne Objekte mit Policies modelliert werden (wie im Doc), oder reicht reines Tagging ohne extra Objekt?
-- Migration: Gibt es bereits Legacy-Listen/Configs, die wir einsammeln müssen (wo liegen sie), oder starten wir bei 0?
+---
+
+## P0 — Testing Suite (vorrangig)
+
+### 1. Testing Suite für Production-Deployment
+**Empfehlung (Decision Matrix Run #7):** ✅ **JA — Testing Suite v0.1 implementieren**
+
+| Option | Aufwand | Wert |
+|--------|---------|------|
+| SystemHealth Modul | Niedrig (~1 Woche) | Mittel |
+| Energy Module | Mittel-Hoch | Hoch |
+| **Testing Suite** | Niedrig-Mittel | **Hoch** ⭐ |
+
+**Begründung:**
+- Testing reduziert Risiko vor Production-Rollout
+- Bestehende Module (Core v0.4.x, HA Integration v0.6.x) sind reif für Verifikation
+- Keine Blockierung durch offene Spezifikationsfragen
+
+**Empfehlung:** Testing Suite v0.1 zuerst implementieren (Repairs workflow, Candidate Poller, Decision Sync)
+
+---
+
+## P1 — TAG_SYSTEM v0.2 (basierend auf Decision Matrix)
+
+### 2. HA-Labels materialisieren
+**Empfehlung:** Nur ausgewählte Facetten (`role.*`, `state.*`) → NICHT automatisch alles
+
+**Begründung:** Privacy-first, Learned Tags sind instabil
+
+---
+
+### 3. Subjects v0.1
+**Empfehlung (Decision Matrix):** ✅ **Alle unterstützten HA-Label-Typen** (`entity`, `device`, `area`, `automation`, `scene`, `script`, `helper`)
+
+**Begründung:** Maximale Flexibilität, zukunftssicher
+
+---
+
+### 4. Subject IDs
+**Empfehlung (Decision Matrix):** ✅ **Mix aus Registry-ID + Fallback**
+
+```yaml
+# canonical_subject_id Schema
+- entity      → entity_id
+- device      → device_id  
+- area        → area_id
+- automation  → automation_id
+- script      → script_id
+- scene       → scene_id
+- helper      → helper_id
+```
+
+---
+
+### 5. Namespace-Policy
+**Empfehlung:** `user.*` NICHT als interner Namespace — **nur HA-Labels importieren**
+
+**Begründung:** Klarere Trennung, HA als Single Source of Truth
+
+---
+
+### 6. Lokalisierung
+**Empfehlung:** ✅ **Nur `display.de` + `en`** (v0.1); i18n später bei Bedarf
+
+---
+
+### 7. Learned Tags → HA-Labels
+**Empfehlung (Decision Matrix):** ✅ **NIE automatisch** — nur nach expliziter Bestätigung
+
+**Begründung:** Privacy-first, Labels sind HA-nativ/sichtbar
+
+---
+
+### 8. Farben/Icons
+**Empfehlung:** HA als UI-Quelle akzeptieren, nur IDs synchron halten
+
+---
+
+### 9. Konflikte/Duplikate
+**Empfehlung:** Existierende HA-Labels ohne `aicp.*` Namespace **ignorieren** (nicht überschreiben)
+
+---
+
+### 10. Habitus-Zonen
+**Empfehlung:** Als eigene interne Objekte mit Policies (wie im Doc spezifiziert)
+
+---
+
+## P2 — Energy Module (geblockt durch P0-P1)
+
+### 11. Sensor Inventory (noch offen)
+> ⚠️ **Warte auf P0-P1** — Energy Module Konfiguration erfordert klare Tag-System-Entscheidungen
+
+---
+
+## Migration
+
+### 12. Legacy-Configs
+**Empfehlung:** Start bei v0.1 — keine Legacy-Migration nötig
+
+---
+
+*Autopilot Run: 2026-02-14 14:49*
+*Decision Matrix Basis: Run #7 (2026-02-14 14:20)*

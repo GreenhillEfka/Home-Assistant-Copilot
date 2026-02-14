@@ -1,27 +1,29 @@
 # Debug Level Worker Report
-Generated: 2026-02-14 2:15 PM (Europe/Berlin)
+Generated: 2026-02-14 2:45 PM (Europe/Berlin)
 
 ---
 
 ## 1. Ist-Zustand
 
-### ✅ Bereits Implementiert
+### ✅ Debug-Level v0.6.0 Vollständig Implementiert
 
-**HA Integration (ai_home_copilot_hacs_repo):**
+**HA Integration (ai_home_copilot_hacs_repo - Branch `main`):**
 
 | Feature | Status | Location |
 |---------|--------|----------|
 | Debug Enable (30min Button) | ✅ | `button.py:CopilotEnableDebug30mButton` |
 | Debug Disable Button | ✅ | `button.py:CopilotDisableDebugButton` |
 | Clear Error Digest Button | ✅ | `button.py:CopilotClearErrorDigestButton` |
-| Services (enable/disable/clear) | ✅ | `core/modules/dev_surface.py` |
-| Kernel State (devlog, errors, debug) | ✅ | `core/modules/dev_surface.py` |
+| **Diagnostic Level Select-Entity** | ✅ | `select.py:DiagnosticLevelSelectEntity` |
+| Services (enable/disable/clear/set_debug_level) | ✅ | `core/modules/dev_surface.py` |
+| Kernel State (devlog, errors, debug_level) | ✅ | `core/modules/dev_surface.py` |
 | DevLogBuffer + ErrorDigest | ✅ | `core/modules/dev_surface.py` |
 | OptionsFlow (devlog_push) | ✅ | `config_flow.py` |
 | Diagnostics Export | ✅ | `diagnostics.py` |
 | PilotSuite Dashboard | ✅ | `pilotsuite_dashboard.py` |
+| **Clear All Logs Service** | ✅ | `dev_surface.py:_svc_clear_all_logs` |
 
-**Core Add-on (ha-copilot-repo):**
+**Core Add-on (ha-copilot-repo - Branch `release/v0.4.1`):**
 
 | Feature | Status | Location |
 |---------|--------|----------|
@@ -30,24 +32,15 @@ Generated: 2026-02-14 2:15 PM (Europe/Berlin)
 | Log Persistence (`/data/dev_logs.jsonl`) | ✅ | `service.py` |
 | API Endpoints (logs, errors, health) | ✅ | `copilot_core/dev_surface/api.py` |
 
-### ⚠️ Noch Offen
-
-| Feature | Priorität | Aufwand | Status |
-|---------|-----------|---------|--------|
-| **Diagnostic Mode Select-Entity** | Hoch | ~2h | ❌ Fehlt |
-| **Clear All Logs Button** | Mittel | ~1h | ❌ Fehlt |
-| **Log-Level Dropdown (OptionsFlow)** | Mittel | ~2h | ❌ Fehlt |
-| **Copy Diagnostics Button** | Niedrig | ~1h | ❌ Fehlt |
-| **HA Logger.set_level Integration** | Niedrig | ~3h | ❌ Fehlt |
-
 ---
 
 ## 2. Repo-Status
 
 ### ai_home_copilot_hacs_repo
 ```
-Branch: main (clean)
-HEAD: 159bd15 — ⚡ Energy Context Module
+Branch: main (clean, 3 commits ahead of development)
+HEAD: a7aaf7d — UniFi Context Module v0.6.1
+Status: All debug-level v0.6.0 features merged
 ```
 
 ### ha-copilot-repo
@@ -58,43 +51,72 @@ HEAD: ec8e9d3 — feat: UniFi + Energy Neurons release (v0.4.13)
 
 ---
 
-## 3. Analyse & Vorschläge
+## 3. Changes seit letztem Report
 
-### Empfehlung 1: Diagnostic Mode Select-Entity (Top-Priorität)
+### Vorheriger Report (2:15 PM):
+- ❌ Diagnostic Mode Select-Entity → **JETZT ✅**
+- ❌ Clear All Logs Button/Service → **JETZT ✅** (als Service implementiert)
 
-**Warum:** Bietet feinere Kontrolle als binäre Buttons.
+### Debug-Level v0.6.0 Features (gemerged):
+```
+a8a7b0f Release v0.6.0: Debug Level Control
+53306ff Add Debug Level Control (v0.6.0)
+```
 
-**Implementierung:**
-1. Neue Konstanten in `const.py`:
-   ```python
-   DIAGNOSTIC_MODES = ["off", "light", "full"]
-   ```
-2. Neue `DiagnosticModeSelectEntity` in `select.py`
-3. Integration in bestehende DevSurface-State-Maschine
-
-### Empfehlung 2: Clear All Logs Button
-
-Neuer `CopilotClearAllLogsButton` in `button.py`, trivial (~1h).
-
-### Empfehlung 3: OptionsFlow Erweiterung
-
-Log-Level Dropdown für persistentes Debugging über Neustarts hinweg.
+**Geänderte Dateien:**
+- `button.py` +30 Zeilen (Debug-Buttons)
+- `const.py` +8 Zeilen (DEBUG_LEVEL_* Konstanten)
+- `select.py` +56 Zeilen (DiagnosticLevelSelectEntity)
+- `dev_surface.py` +40 Zeilen (Services, ErrorDigest updates)
+- `manifest.json` +2 Zeilen (Version bump)
+- `CHANGELOG.md` +30 Zeilen
 
 ---
 
-## 4. Offene Fragen
+## 4. Offene Punkte (niedrige Priorität)
 
-1. **Mode-Naming:** "Diagnostic Mode" vs "Debug Level"?
-2. **Persistenz:** RAM-only oder über Options persistieren?
-3. **Auto-Disable:** Fix 30min oder konfigurierbar?
+| Feature | Priorität | Aufwand | Status |
+|---------|-----------|---------|--------|
+| **HA Logger.set_level Integration** | Niedrig | ~3h | ❌ Nicht geplant |
+| **Copy Diagnostics Button (UI)** | Niedrig | ~1h | ❌ Nicht geplant |
+| **Log-Level in OptionsFlow persistieren** | Niedrig | ~2h | ❌ Nicht geplant |
+
+**Begründung:**
+- Die bestehende Implementierung erfüllt den Kernanwendungsfall
+- Auto-Disable nach 30min ist sinnvoll
+- RAM-only reicht für Debugging-Zwecke
 
 ---
 
-## 5. Status
+## 5. Empfehlungen
 
-**Keine Tasks im Command-File.** Repos sind clean.
-Nächster Run: ~2:45 PM.
+### Keine unmittelbaren Änderungen erforderlich
+
+Das Debug-Level Feature ist vollständig implementiert und stabil.
+
+### Optionale zukünftige Verbesserungen (ohne Zeitdruck):
+
+1. **HA Logger Integration**
+   - `logger.set_level` Service-Call für feingranulare HA-Logging
+   - Nützlich für tiefe Diagnostik ohne Neustart
+
+2. **Diagnostik-Export Button**
+   - CSV/JSON Export der Debug-Logs
+   - Für User, die Logs teilen möchten
+
+3. **OptionsFlow: Debug-Level Persistenz**
+   - Debug-Level über Neustarts hinweg erhalten
+   - Aktuell: RAM-only, wird bei Neustart zurückgesetzt
 
 ---
 
-*Worker: cron:f84e4b7d-c40f-46b3-8dad-ba598e15ccf5 | Lauf 4 (14.02.2026)*
+## 6. Status
+
+**✅ Keine Tasks erforderlich.**
+Beide Repos sind clean. Debug-Level v0.6.0 vollständig in `main` integriert.
+
+Nächster Run: ~3:15 PM.
+
+---
+
+*Worker: cron:f84e4b7d-c40f-46b3-8dad-ba598e15ccf5 | Lauf 5 (14.02.2026)*
