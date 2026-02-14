@@ -64,6 +64,14 @@
       "result": "released",
       "summary": "Weather Context Module — PV forecasting integration (v0.6.2)",
       "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.2"
+    },
+    {
+      "ts": "2026-02-14T15:29:00+01:00",
+      "kind": "testing_enhancement",
+      "branch": "development",
+      "result": "released",
+      "summary": "Testing Suite v0.1.1 — Weather Context Tests (v0.6.3)",
+      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.3"
     }
   ],
   "pending_questions": [

@@ -277,3 +277,32 @@ This log is appended by the Autopilot cron.
 
 ### To Resume
 Manually trigger a new autopilot window or run with fresh parameters.
+
+---
+
+## 2026-02-14 15:29 — Testing Suite v0.1.1 — Weather Context Tests (autopilot) — ✅ RELEASED
+
+### What changed
+- **Testing Suite v0.1.1**: Enhanced test coverage for Weather Context Module
+- Added **7 new test cases**:
+  - `test_weather_context_entities()`: All 7 weather/PV entities validated
+  - `test_weather_condition_options()`: 11 weather condition options verified
+  - `test_pv_recommendation_options()`: 4 PV recommendation options verified
+  - `test_weather_pv_surplus_calculation()`: PV surplus calculation logic tested
+  - `test_all_context_modules_registered()`: Energy/UniFi/Weather module registration
+- Now covers all 3 Context Modules: Energy (4 entities), UniFi (6 entities), Weather (7 entities)
+
+### Files changed
+- `custom_components/ai_home_copilot/tests/test_suite_v01.py` (+84 lines)
+- `custom_components/ai_home_copilot/manifest.json` (version → 0.6.3)
+- `CHANGELOG.md` (+v0.6.3 entry)
+
+### Status
+- **✅ RELEASED**: https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.3
+- Branch: development
+- py_compile verified for test file
+
+### Next logical step
+- **User Antworten auf P0/P1 Fragen** (Tag System decisions)
+- ODER: Tag System v0.2 Implementierung (basierend auf Decision Matrix Empfehlungen)
+- ODER: Weitere Testing Suite Erweiterungen (Repairs workflow tests, Candidate Poller tests)
