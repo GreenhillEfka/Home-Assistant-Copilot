@@ -15,6 +15,29 @@
         "notes/autopilot_state.json",
         "notes/* (alpha_worker + perplexity_audit + questions)"
       ]
+    },
+    {
+      "ts": "2026-02-14T13:30:00+01:00",
+      "kind": "consistency_fix",
+      "branch": "release/v0.4.1",
+      "result": "committed",
+      "summary": "Consistency fix: init_energy_api naming pattern",
+      "artifacts": [
+        "ha-copilot-repo/.../energy/api.py",
+        "ha-copilot-repo/.../core_setup.py"
+      ]
+    },
+    {
+      "ts": "2026-02-14T13:50:00+01:00",
+      "kind": "feature_add",
+      "branch": "release/v0.4.1",
+      "result": "committed",
+      "summary": "Brain Graph configurable limits (v0.4.12)",
+      "artifacts": [
+        "addons/copilot_core/config.json",
+        "addons/copilot_core/rootfs/usr/src/app/copilot_core/core_setup.py",
+        "CHANGELOG.md"
+      ]
     }
   ],
   "pending_questions": []
