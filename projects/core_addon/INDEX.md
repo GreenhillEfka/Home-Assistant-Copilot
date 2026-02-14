@@ -1,6 +1,6 @@
 # Core Add-on - Entwicklungs-Index
 
-## 🎯 Status: v0.6.1 (Sync mit HA Integration)
+## 🎯 Status: v0.4.15 (Sync mit HA Integration v0.7.3)
 
 ---
 
@@ -43,13 +43,17 @@
 
 ## 📝 Todo / Backlog
 
-| Task | Priority | Depends On |
-|------|----------|------------|
-| **Habitus Zones v2** - Zone-aware pattern mining | High | Brain Graph zones |
-| **Graph Candidates Bridge** - Link graph patterns to candidate lifecycle | Medium | Habitus Miner |
-| **Performance Scaling** - Optimize for large graphs (>500 nodes) | Low | - |
-| **Security/Privacy Audit** - Review PII redaction coverage | Low | - |
-| **Ops Runbook** - Deployment & monitoring docs | Low | - |
+| Task | Priority | Status |
+|------|----------|--------|
+| **Performance Scaling** - Optimize for large graphs (>500 nodes) | Low | Planned |
+| **Security/Privacy Audit** - Review PII redaction coverage | Low | Planned |
+
+## ✅ Recently Completed (v0.4.15)
+
+| Task | Status | Date |
+|------|--------|------|
+| **Habitus Zones v2** - Zone-aware pattern mining | ✅ Done | 2026-02-14 |
+| **Graph Candidates Bridge** - Link graph patterns to candidate lifecycle | ✅ Done | 2026-02-14 |
 
 ---
 
@@ -81,7 +85,9 @@ tests/test_unifi.py                ✅
 
 Siehe: `/config/.openclaw/workspace/projects/ai_home_copilot/INDEX.md`
 
-Nächster Sync-Punkt: Habitus Zones v2 (HA Integration muss Habitus Dashboard Cards + Zone Entities liefern)
+Aktueller Sync: v0.4.15 (Core) ↔ v0.7.3 (HA Integration) ✅
+
+Beide Repos sind vollständig synchronisiert mit Habitus Zones v2.
 
 ---
 

@@ -1,105 +1,45 @@
-# AI Home CoPilot - Entwicklungs-Index
+# AI Home CoPilot - INDEX.md
 
-## 🎯 Erstes Gesamtziel: v0.7.0 Release
+## Last Updated
+$(date '+%Y-%m-%d %H:%M')
 
-**Prinzip:** HA Integration UND Core Add-on werden **synchron** entwickelt und released.
+## Project Status
 
----
+| Metric | Value |
+|--------|-------|
+| Branch | development |
+| Version | v0.7.0 |
+| Modules | 22 total |
+| Done | 12 (55%) |
 
-## 🔄 Zwei-Repo Architektur
+## Active Tasks
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    AI Home CoPilot                          │
-├─────────────────────────────────────────────────────────────┤
-│  HA Integration              │  Core Add-on              │
-│  (ai_home_copilot_hacs_repo) │  (ha-copilot-repo)        │
-│                              │                           │
-│  • Entities                 │  • Neurons                │
-│  • Services                 │  • Brain Graph            │
-│  • Config Flow              │  • API Endpoints          │
-│  • Dashboard UX             │  • Event Processing       │
-└────────────────────────────┴────────────────────────────┘
-           ↓                              ↓
-        Beide repos werden synchron released!
-```
+| Task | Status | Priority | Assignee |
+|------|--------|----------|-----------|
+| Habitus Zones v2 | in-progress | high | Project Agent |
+| Habitus Dashboard Cards | in-progress | medium | Project Agent |
+| Brain Graph v2 | in-progress | high | Task Worker |
 
----
+## Completed Today
 
-## ✅ Completed Modules (v0.6.1)
+- [x] Habitus Miner Bug Fixes
+- [x] Candidates Store Merge
+- [x] Architecture Fixes
+- [x] v0.7.0 Release
 
-### HA Integration + Core Add-on同步
+## Next Steps
 
-| Feature | HA Integration | Core Add-on | Status |
-|---------|---------------|-------------|--------|
-| **Mood Module** | ✅ Ready | ✅ Mood Neuron | ✅ Done |
-| **Media Context v2** | ✅ Ready | ✅ Media Neuron | ✅ Done |
-| **Energy Module** | ✅ Ready | ✅ Energy Neuron | ✅ Done |
-| **Debug Level v0.6** | ✅ Ready | - | ✅ Done |
-| **Forwarder Quality** | ✅ Ready | ✅ Forwarder Neuron | ✅ Done |
-| **Tag System** | ✅ Ready | ✅ Tag Neuron | ✅ Done |
-| **Dev Surface** | ✅ Ready | - | ✅ Done |
-| **Diagnostics Contract** | ✅ Ready | - | ✅ Done |
-| **Log Fixer TX** | ✅ Ready | - | ✅ Done |
-| **Inventory** | ✅ Ready | - | ✅ Done |
+1. Habitus Zones v2 Implementation
+2. Dashboard Cards Integration
+3. Brain Graph v2 Testing
+4. v0.7.1 Release Prep
 
----
+## Dependencies
 
-## 🔶 In Progress
+- Core Add-on v0.4.x
+- Brain Graph v2
+- Neurons Architecture
 
-| Feature | HA Integration | Core Add-on | Status |
-|---------|---------------|-------------|--------|
-| **UniFi Module** | ⚠️ needs_fixes | ✅ UniFi Neuron | 🔶 Testing |
-| **Brain Graph v2** | 🔶 Testing | ✅ Brain Graph Neuron | ✅ Done |
+## Notes
 
----
-
-## 📝 Todo / Backlog
-
-| Feature | HA Integration | Core Add-on | Priority |
-|---------|---------------|-------------|----------|
-| **Habitus Zones v2** | Todo | - | High |
-| **Habitus Dashboard Cards** | Todo | - | Medium |
-| **Brain Graph Viz** | Todo | - | Medium |
-| **Graph Candidates Bridge** | Todo | ✅ Candidate Neuron | Medium |
-| **Candidates Store** | Todo | - | Medium |
-| **Ops Runbook** | Todo | - | Low |
-| **System Health** | Todo | ✅ Health Neuron | Low |
-| **Update Rollback** | Todo | - | Low |
-| **Performance Scaling** | Todo | - | Low |
-| **Security Privacy** | Todo | - | Low |
-| **Repairs Blueprints** | Todo | - | Low |
-
----
-
-## 📊 Fortschritt
-
-```
-HA Integration:     10/22 Modules done (45%)
-Core Add-on:        7/12 Neurons done (58%)
-
-Sync Status:        7 Features fully synchronized
-```
-
----
-
-## 🔄 Synchronisations-Regeln
-
-1. **Beide Repos werden im selben Release-Zyklus aktualisiert**
-2. **Kein Feature gilt als "done" bis beide Seiten implementiert sind**
-3. **Versionen werden parallel gebumpt** (z.B. Integration v0.6.1 + Add-on v0.4.1)
-4. **Changelog listet beide Änderungen**
-
----
-
-## 📁 Verknüpfte Dokumente
-
-- HA Integration: `/config/.openclaw/workspace/ai_home_copilot_hacs_repo`
-- Core Add-on: `/config/.openclaw/workspace/ha-copilot-repo`
-- Specs: `docs/module_specs/`
-- Reports: `notes/module_test_reports/`
-- Worker: `docs/worker_templates/ITERATION_MANAGER.md`
-
----
-
-*Letzte Aktualisierung: 2026-02-14*
+See PROJECT_AGENT.md for detailed task breakdown.
