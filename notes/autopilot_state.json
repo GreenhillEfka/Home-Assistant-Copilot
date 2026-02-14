@@ -56,18 +56,27 @@
       "result": "released",
       "summary": "UniFi Context Module — Connect Core UniFi Neuron to HA Integration (v0.6.1)",
       "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.1"
+    },
+    {
+      "ts": "2026-02-14T14:49:00+01:00",
+      "kind": "questions_update",
+      "branch": "master",
+      "result": "committed",
+      "summary": "Enrich questions_for_user_next_time.md with Decision Matrix recommendations (P0/P1/P2 structure, Tag System guidance)"
     }
   ],
   "pending_questions": [
-    "Wollen wir AICoPilot-Tags **immer** als HA-Labels materialisieren (Default: ja), oder nur für ausgewählte Facetten (z. B. `role.*`, `state.*`)?",
-    "Welche **Subjects** sollen v0.1 unterstützen: nur `entity` + `device` + `area`, oder auch `automation/scene/script/helper` (HA kann Labels dafür im UI)?",
-    "Sollen wir als interne Referenz für Subjects primär `entity_id` verwenden oder lieber Registry-IDs/`unique_id`/`device_id` (stabiler bei Rename)?",
-    "Namespace-Policy: Ist `user.*` gewünscht (Nutzer definieren eigene Tags), oder sollen Nutzer nur über HA-Labels arbeiten und AICoPilot importiert sie optional?",
-    "Lokalisierung: Reicht `display.de` (und später `en`), oder sollen wir von Anfang an i18n-konform arbeiten?",
-    "Learned/Candidate Tags: Dürfen die jemals automatisch als HA-Label erscheinen, oder nur nach expliziter Bestätigung (empfohlen: nur nach Bestätigung)?",
-    "Farben/Icons: Wollen wir (a) zentral im Tag-Registry-Objekt pflegen und nach HA syncen, oder (b) HA als UI-Quelle akzeptieren und nur IDs synchron halten?",
-    "Konflikte/Duplikate: Wie sollen wir umgehen, wenn ein Nutzer schon ein HA-Label „Sicherheitskritisch\" hat, aber ohne `aicp.*` Namespace?",
-    "Habitus-Zonen: Sollen diese als eigene interne Objekte mit Policies modelliert werden (wie im Doc), oder reicht reines Tagging ohne extra Objekt?",
-    "Migration: Gibt es bereits Legacy-Listen/Configs, die wir einsammeln müssen (wo liegen sie), oder starten wir bei 0?"
+    "P0: Testing Suite v0.1 — Decision Matrix empfiehlt JA (Reduziert Risiko vor Production-Rollout)",
+    "P1: HA-Labels materialisieren — Empfehlung: nur ausgewählte Facetten (role.*, state.*), NICHT automatisch",
+    "P1: Subjects v0.1 — Empfehlung: ALLE unterstützten HA-Label-Typen (entity, device, area, automation, scene, script, helper)",
+    "P1: Subject IDs — Empfehlung: Mix aus Registry-ID + Fallback (entity_id, device_id, area_id, etc.)",
+    "P1: Namespace-Policy — Empfehlung: user.* NICHT als interner Namespace; nur HA-Labels importieren",
+    "P1: Lokalisierung — Empfehlung: Nur display.de + en (v0.1); i18n später bei Bedarf",
+    "P1: Learned Tags → HA-Labels — Empfehlung: NIE automatisch, nur nach expliziter Bestätigung",
+    "P1: Farben/Icons — Empfehlung: HA als UI-Quelle akzeptieren, nur IDs synchron halten",
+    "P1: Konflikte/Duplikate — Empfehlung: Existierende HA-Labels ohne aicp.* Namespace ignorieren",
+    "P1: Habitus-Zonen — Empfehlung: Als eigene interne Objekte mit Policies modellieren",
+    "P2: Energy Module — Geblockt durch P0-P1 Entscheidungen (Sensor Inventory noch offen)",
+    "P2: Migration — Empfehlung: Start bei v0.1, keine Legacy-Migration nötig"
   ]
 }
