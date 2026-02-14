@@ -1,9 +1,10 @@
 {
   "version": 1,
-  "lastRun": "2026-02-14T14:20:00+01:00",
+  "lastRun": "2026-02-14T15:50:00+01:00",
   "lastOutput": "notes/decision_matrix_latest.md",
-  "runs": 7,
-  "summary": "Keine neuen Fragen seit Run #6. Matrix unverändert (Timestamps aktualisiert). Offene Entscheidungen: 3 (Testing Suite, TAG_SYSTEM v0.2 offene Punkte, Energy Module Konfiguration). User-Input weiterhin benötigt für P0-P2 Items.",
+  "runs": 8,
+  "summary": "Matrix aktualisiert mit 3 Entscheidungspunkten. P0: Testing Suite v0.1 vollständige Implementierung empfohlen. P1: Sensor Inventory Hybrid-Ansatz (metric + binary). P2: Energy Module pausiert bis P0+P1 abgeschlossen. Keine neuen Fragen hinzugefügt.",
   "openBlockers": 1,
-  "decisionsReady": 3
+  "decisionsReady": 3,
+  "nextAction": "User-Input für P0 und P1 Empfehlungen benötigt"
 }

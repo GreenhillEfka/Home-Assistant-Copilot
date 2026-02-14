@@ -6,6 +6,89 @@ This log is appended by the Autopilot cron.
 
 ---
 
+## 2026-02-14 15:59 — Error Grouping (autopilot) — ✅ RELEASED
+
+### What changed
+- **Error Grouping v0.6.5**: Improved error diagnostics with automatic grouping
+- Added error grouping based on exception type + operation
+- Tracks first_seen, last_seen, and occurrence count per group
+- New `get_error_groups(min_count)` method for recurring error analysis
+- Error groups included in `as_dict()` output
+
+### Example Output
+```json
+{
+  "error_groups": [
+    {
+      "group_key": "TimeoutError:ping",
+      "count": 5,
+      "first_seen": "2026-02-14T12:00:00Z",
+      "last_seen": "2026-02-14T12:05:00Z",
+      "sample_error": {
+        "error_key": "network",
+        "message": "Connection timeout",
+        "where": "ping"
+      }
+    }
+  ]
+}
+```
+
+### Files changed
+- `custom_components/ai_home_copilot/core/modules/dev_surface.py` (ErrorDigest class enhanced)
+- `custom_components/ai_home_copilot/manifest.json` (version → 0.6.5)
+- `CHANGELOG.md` (+v0.6.5 entry)
+
+### Status
+- **✅ RELEASED**: https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.5
+- Branch: development
+- py_compile verified for dev_surface.py
+
+### Next logical step
+- **User Antworten auf P1 Fragen abwarten** (Tag System decisions)
+- ODER: Token/OptionsFlow UX Verbesserungen
+- ODER: Weitere Error Handling Verbesserungen
+
+
+## 2026-02-14 15:39 — Testing Suite v0.2 (autopilot) — ✅ RELEASED
+
+### What changed
+- **Testing Suite v0.2**: Production-Ready Integration Tests
+- Added comprehensive integration tests for production deployment:
+  - **Module Imports**: All modules import cleanly (energy, unifi, weather, core)
+  - **Coordinator Pattern Tests**: Verify coordinator initialization and data flow
+  - **API Mocking Tests**: Mock Core Add-on API responses for all modules
+  - **Entity Validation**: Validate entity configs against HA schema
+  - **Error Handling Tests**: API errors, missing entities, empty responses
+  - **Performance Tests**: Reasonable update intervals and batch sizes
+
+### Test Coverage Summary
+| Category | Tests |
+|----------|-------|
+| Module Imports | 5 |
+| Coordinator Pattern | 3 |
+| API Mocking | 3 |
+| Entity Validation | 9 |
+| Error Handling | 3 |
+| Performance | 2 |
+
+### Files changed
+- `custom_components/ai_home_copilot/tests/test_suite_v02.py` (11.5 KB, 25 test cases)
+- `custom_components/ai_home_copilot/manifest.json` (version → 0.6.4)
+- `CHANGELOG.md` (+v0.6.4 entry)
+
+### Status
+- **✅ RELEASED**: https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.4
+- Branch: development
+- Py_compile verified for all test files
+
+### Next logical step
+- **User Antworten auf P1 Fragen abwarten** (Tag System decisions)
+- ODER: Tag System v0.2 Implementierung (basierend auf Decision Matrix Empfehlungen)
+- ODER: Weitere Module (z.B. Mood Module Tests, Brain Graph Integration Tests)
+
+---
+
 ## 2026-02-14 15:19 — Weather Context Module v0.6.2 (autopilot) — ✅ RELEASED
 
 ### What changed

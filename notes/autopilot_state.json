@@ -72,6 +72,22 @@
       "result": "released",
       "summary": "Testing Suite v0.1.1 — Weather Context Tests (v0.6.3)",
       "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.3"
+    },
+    {
+      "ts": "2026-02-14T15:39:00+01:00",
+      "kind": "testing_enhancement",
+      "branch": "development",
+      "result": "released",
+      "summary": "Testing Suite v0.2 — Production-Ready Integration Tests (v0.6.4)",
+      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.4"
+    },
+    {
+      "ts": "2026-02-14T15:59:00+01:00",
+      "kind": "feature_add",
+      "branch": "development",
+      "result": "released",
+      "summary": "Error Grouping — Improved Error Diagnostics (v0.6.5)",
+      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.5"
     }
   ],
   "pending_questions": [
