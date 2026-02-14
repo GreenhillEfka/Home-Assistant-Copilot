@@ -1,5 +1,5 @@
 # Debug Level Worker Report
-Generated: 2026-02-14 3:45 PM (Europe/Berlin)
+Generated: 2026-02-14 4:15 PM (Europe/Berlin)
 
 ---
 
@@ -9,28 +9,28 @@ Generated: 2026-02-14 3:45 PM (Europe/Berlin)
 
 **HA Integration (ai_home_copilot_hacs_repo):**
 
-| Feature | Status | Location |
-|---------|--------|----------|
-| Debug Enable (30min Button) | ✅ | `button.py:CopilotEnableDebug30mButton` |
-| Debug Disable Button | ✅ | `button.py:CopilotDisableDebugButton` |
-| Clear Error Digest Button | ✅ | `button.py:CopilotClearErrorDigestButton` |
-| Diagnostic Level Select-Entity | ✅ | `select.py:DiagnosticLevelSelectEntity` |
-| Services (enable/disable/clear/set_debug_level) | ✅ | `core/modules/dev_surface.py` |
-| Kernel State (devlog, errors, debug_level) | ✅ | `core/modules/dev_surface.py` |
-| DevLogBuffer + ErrorDigest | ✅ | `core/modules/dev_surface.py` |
-| OptionsFlow (devlog_push) | ✅ | `config_flow.py` |
-| Diagnostics Export | ✅ | `diagnostics.py` |
-| PilotSuite Dashboard | ✅ | `pilotsuite_dashboard.py` |
-| Clear All Logs Service | ✅ | `dev_surface.py:_svc_clear_all_logs` |
+| Feature | Status |
+|---------|--------|
+| Debug Enable (30min Button) | ✅ |
+| Debug Disable Button | ✅ |
+| Clear Error Digest Button | ✅ |
+| Diagnostic Level Select-Entity | ✅ |
+| Services (enable/disable/clear/set_debug_level) | ✅ |
+| Kernel State (devlog, errors, debug_level) | ✅ |
+| DevLogBuffer + ErrorDigest | ✅ |
+| OptionsFlow (devlog_push) | ✅ |
+| Diagnostics Export | ✅ |
+| PilotSuite Dashboard | ✅ |
+| Clear All Logs Service | ✅ |
 
 **Core Add-on (ha-copilot-repo):**
 
-| Feature | Status | Location |
-|---------|--------|----------|
-| DevSurfaceService | ✅ | `copilot_core/dev_surface/service.py` |
-| Ring Buffer (500 Einträge) | ✅ | `service.py` |
-| Log Persistence (`/data/dev_logs.jsonl`) | ✅ | `service.py` |
-| API Endpoints (logs, errors, health) | ✅ | `copilot_core/dev_surface/api.py` |
+| Feature | Status |
+|---------|--------|
+| DevSurfaceService | ✅ |
+| Ring Buffer (500 Einträge) | ✅ |
+| Log Persistence (`/data/dev_logs.jsonl`) | ✅ |
+| API Endpoints (logs, errors, health) | ✅ |
 
 ---
 
@@ -38,8 +38,8 @@ Generated: 2026-02-14 3:45 PM (Europe/Berlin)
 
 ### ai_home_copilot_hacs_repo
 ```
-Branch: development (clean, synced with origin)
-HEAD: 24b3903 — Testing Suite v0.2 (Production-Ready)
+Branch: wip/module-forwarder_quality/20260208-172947 (working tree clean)
+HEAD: 82136e8 — Token UX verbessert (v0.6.6)
 Status: Debug-Level v0.6.0 vollständig in main + development integriert
 ```
 
@@ -47,6 +47,7 @@ Status: Debug-Level v0.6.0 vollständig in main + development integriert
 ```
 Branch: release/v0.4.1 (clean)
 HEAD: ec8e9d3 — feat: UniFi + Energy Neurons release (v0.4.13)
+Status: Stable, keine Debug-Level Änderungen seit letztem Run
 ```
 
 ---
@@ -55,22 +56,20 @@ HEAD: ec8e9d3 — feat: UniFi + Energy Neurons release (v0.4.13)
 
 **Keine Änderungen an Debug-Level-Features.**
 
-Beide Repos unchanged seit letztem Run (2:45 PM).
+Beide Repos unchanged.
+
+**Hinweis:** Branch `dev/autopilot-debug-level-v0.6.0` wurde bereits aufgeräumt (nicht mehr vorhanden).
 
 ---
 
-## 4. Analyse: Veralteter Branch
+## 4. Analyse
 
-**Branch `dev/autopilot-debug-level-v0.6.0`**:
-- ✅ Identisch mit `main` (keine neuen Commits)
-- ⚠️ Sollte gelöscht werden (veraltet, Feature bereits gemergt)
+### ✅ Keine Issues gefunden
 
-```
-Lokal:  dev/autopilot-debug-level-v0.6.0
-Remote: origin/dev/autopilot-debug-level-v0.6.0
-```
-
-**Empfehlung:** Branch kann sicher gelöscht werden (optional, kein Zeitdruck).
+- Beide Repos: Working tree clean
+- Keine offenen Debug-Level-bezogenen Branches
+- Features vollständig in main/development integriert
+- Core Add-on stable auf release/v0.4.1
 
 ---
 
@@ -78,30 +77,19 @@ Remote: origin/dev/autopilot-debug-level-v0.6.0
 
 | Feature | Priorität | Aufwand | Status |
 |---------|-----------|---------|--------|
-| **HA Logger.set_level Integration** | Niedrig | ~3h | ❌ Nicht geplant |
-| **Copy Diagnostics Button (UI)** | Niedrig | ~1h | ❌ Nicht geplant |
-| **Log-Level in OptionsFlow persistieren** | Niedrig | ~2h | ❌ Nicht geplant |
-| **Veralteten Debug-Branch aufräumen** | Niedrig | ~5min | ⚠️ Optional |
+| HA Logger.set_level Integration | Niedrig | ~3h | ❌ Nicht geplant |
+| Copy Diagnostics Button (UI) | Niedrig | ~1h | ❌ Nicht geplant |
+| Log-Level in OptionsFlow persistieren | Niedrig | ~2h | ❌ Nicht geplant |
 
 ---
 
 ## 6. Empfehlungen & Vorschläge
 
-### A. Branch-Aufräumen (optional)
-```
-# Lokal löschen
-git branch -d dev/autopilot-debug-level-v0.6.0
+### Keine unmittelbaren Maßnahmen erforderlich
 
-# Remote löschen
-git push origin --delete dev/autopilot-debug-level-v0.6.0
-```
-**Kein Risiko:** Branch ist identisch mit main, Features sind gemergt.
+Das Debug-Level Feature v0.6.0 ist vollständig implementiert und stabil.
 
-### B. Keine weiteren Debug-Level-Änderungen erforderlich
-
-Das Debug-Level Feature ist vollständig implementiert und stabil seit v0.6.0.
-
-### C. Optionale zukünftige Verbesserungen (ohne Zeitdruck)
+### Optionale zukünftige Verbesserungen (ohne Zeitdruck)
 
 1. **HA Logger Integration**
    - `logger.set_level` Service-Call für feingranulare HA-Logging
@@ -119,20 +107,19 @@ Das Debug-Level Feature ist vollständig implementiert und stabil seit v0.6.0.
 
 ## 7. Tasks für nächsten Run
 
-- [ ] Branch-Aufräumen (dev/autopilot-debug-level-v0.6.0 löschen) — **nur wenn gewünscht**
-- [ ] Keine Debug-Level-Änderungen geplant
+- Keine Debug-Level-Änderungen geplant
 
 ---
 
 ## 8. Status
 
 **✅ Keine unmittelbaren Tasks erforderlich.**
-Beide Repos sind clean. Debug-Level v0.6.0 vollständig in `main` + `development` integriert.
+Beide Repos sind clean. Debug-Level v0.6.0 vollständig implementiert.
 
 **Analysis Complete:** Keine neuen Issues oder Bugs gefunden.
 
-Nächster Run: ~4:15 PM.
+Nächster Run: ~4:45 PM.
 
 ---
 
-*Worker: cron:f84e4b7d-c40f-46b3-8dad-ba598e15ccf5 | Lauf 6 (14.02.2026)*
+*Worker: cron:f84e4b7d-c40f-46b3-8dad-ba598e15ccf5 | Lauf 7 (14.02.2026)*

@@ -1,57 +1,105 @@
-# AI Home CoPilot - Feature Specifications
+# AI Home CoPilot - Entwicklungs-Index
 
-## Completed Modules (v0.6.1)
+## 🎯 Erstes Gesamtziel: v0.7.0 Release
 
-### mood_module
-**Status:** ✅ Ready  
-**Spec:** `docs/module_specs/mood_module_v0.1.md`  
-**Tests:** `tests/test_mood_context.py`
+**Prinzip:** HA Integration UND Core Add-on werden **synchron** entwickelt und released.
 
-### media_context_v2
-**Status:** ✅ Ready  
-**Spec:** `docs/module_specs/media_context_v2_v0.1.md`  
-**Features:** Zone Mapping, Volume Control, Active Target Routing
+---
 
-### energy_module
-**Status:** ✅ Ready  
-**Spec:** `docs/module_specs/energy_module_v0.1.md`
+## 🔄 Zwei-Repo Architektur
 
-### debug_level_v0.6
-**Status:** ✅ Ready  
-**Features:** Diagnostic Level Select Entity, Clear All Logs Button
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    AI Home CoPilot                          │
+├─────────────────────────────────────────────────────────────┤
+│  HA Integration              │  Core Add-on              │
+│  (ai_home_copilot_hacs_repo) │  (ha-copilot-repo)        │
+│                              │                           │
+│  • Entities                 │  • Neurons                │
+│  • Services                 │  • Brain Graph            │
+│  • Config Flow              │  • API Endpoints          │
+│  • Dashboard UX             │  • Event Processing       │
+└────────────────────────────┴────────────────────────────┘
+           ↓                              ↓
+        Beide repos werden synchron released!
+```
 
-### forwarder_quality
-**Status:** ✅ Ready  
-**Spec:** `docs/module_specs/forwarder_quality_v0.1.md`  
-**Branch:** `wip/module-forwarder_quality/20260208-172947`
+---
 
-## In Progress
+## ✅ Completed Modules (v0.6.1)
 
-### unifi_module
-**Status:** 🔶 Testing  
-**Spec:** `docs/module_specs/unifi_module_v0.1.md`  
-**Branch:** `wip/module-unifi_module/20260209-2149`
+### HA Integration + Core Add-on同步
 
-## Backlog
+| Feature | HA Integration | Core Add-on | Status |
+|---------|---------------|-------------|--------|
+| **Mood Module** | ✅ Ready | ✅ Mood Neuron | ✅ Done |
+| **Media Context v2** | ✅ Ready | ✅ Media Neuron | ✅ Done |
+| **Energy Module** | ✅ Ready | ✅ Energy Neuron | ✅ Done |
+| **Debug Level v0.6** | ✅ Ready | - | ✅ Done |
+| **Forwarder Quality** | ✅ Ready | ✅ Forwarder Neuron | ✅ Done |
+| **Tag System** | ✅ Ready | ✅ Tag Neuron | ✅ Done |
+| **Dev Surface** | ✅ Ready | - | ✅ Done |
+| **Diagnostics Contract** | ✅ Ready | - | ✅ Done |
+| **Log Fixer TX** | ✅ Ready | - | ✅ Done |
+| **Inventory** | ✅ Ready | - | ✅ Done |
 
-### brain_graph_v2
-**Priority:** High  
-**Spec:** `docs/module_specs/brain_graph_v0.2.md`
+---
 
-### habitus_zones_v2
-**Priority:** High  
-**Spec:** `docs/module_specs/habitus_zones_v2_v0.1.md`
+## 🔶 In Progress
 
-### habitus_dashboard_cards
-**Priority:** Medium  
-**Spec:** `docs/module_specs/habitus_dashboard_cards_v0.1.md`
+| Feature | HA Integration | Core Add-on | Status |
+|---------|---------------|-------------|--------|
+| **UniFi Module** | ⚠️ needs_fixes | ✅ UniFi Neuron | 🔶 Testing |
+| **Brain Graph v2** | 🔶 Testing | ✅ Brain Graph Neuron | ✅ Done |
 
-### tag_system_impl
-**Priority:** Medium  
-**Spec:** `docs/module_specs/tag_system_impl_v0.1.md`
+---
 
-## Next Iteration
+## 📝 Todo / Backlog
 
-**Priority Queue:**
-1. brain_graph_v2 → Tests → Merge
-2. UniFi Module → Merge wenn Tests OK
+| Feature | HA Integration | Core Add-on | Priority |
+|---------|---------------|-------------|----------|
+| **Habitus Zones v2** | Todo | - | High |
+| **Habitus Dashboard Cards** | Todo | - | Medium |
+| **Brain Graph Viz** | Todo | - | Medium |
+| **Graph Candidates Bridge** | Todo | ✅ Candidate Neuron | Medium |
+| **Candidates Store** | Todo | - | Medium |
+| **Ops Runbook** | Todo | - | Low |
+| **System Health** | Todo | ✅ Health Neuron | Low |
+| **Update Rollback** | Todo | - | Low |
+| **Performance Scaling** | Todo | - | Low |
+| **Security Privacy** | Todo | - | Low |
+| **Repairs Blueprints** | Todo | - | Low |
+
+---
+
+## 📊 Fortschritt
+
+```
+HA Integration:     10/22 Modules done (45%)
+Core Add-on:        7/12 Neurons done (58%)
+
+Sync Status:        7 Features fully synchronized
+```
+
+---
+
+## 🔄 Synchronisations-Regeln
+
+1. **Beide Repos werden im selben Release-Zyklus aktualisiert**
+2. **Kein Feature gilt als "done" bis beide Seiten implementiert sind**
+3. **Versionen werden parallel gebumpt** (z.B. Integration v0.6.1 + Add-on v0.4.1)
+4. **Changelog listet beide Änderungen**
+
+---
+
+## 📁 Verknüpfte Dokumente
+
+- HA Integration: `/config/.openclaw/workspace/ai_home_copilot_hacs_repo`
+- Core Add-on: `/config/.openclaw/workspace/ha-copilot-repo`
+- Specs: `docs/module_specs/`
+- Reports: `notes/module_test_reports/`
+- Worker: `docs/worker_templates/ITERATION_MANAGER.md`
+
+---
+
+*Letzte Aktualisierung: 2026-02-14*

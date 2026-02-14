@@ -1,8 +1,72 @@
 # AI Home CoPilot — Autopilot Log (10min loop)
 
-Window: 2026-02-08 06:18–10:18 (Europe/Berlin)
+Window: 2026-02-14 16:00–20:00 (Europe/Berlin)
 
 This log is appended by the Autopilot cron.
+
+---
+
+## 2026-02-14 16:50 — Tag System v0.2 (autopilot) — ✅ RELEASED
+
+### What changed
+- **Tag System v0.2 — Decision Matrix Implementation**:
+  - Decision Matrix P1 Features implementiert:
+    - HA-Labels materialisieren: nur ausgewählte Facetten (`role.*`, `state.*`)
+    - Subjects: alle HA-Label-Typen (`entity`, `device`, `area`, `automation`, `scene`, `script`, `helper`)
+    - Subject IDs: Mix aus Registry-ID + Fallback
+    - Namespace: `user.*` NICHT als intern (nur HA-Labels importieren)
+    - Lokalisierung: nur `display.de` + `en`
+    - Learned Tags → HA-Labels: NIE automatisch (explizite Bestätigung nötig)
+    - Farben/Icons: HA als UI-Quelle
+    - Konflikte: existierende HA-Labels ohne `aicp.*` ignorieren
+    - Habitus-Zonen: eigene interne Objekte mit Policies
+  - In-Memory Registry für schnelle Tag-Verwaltung
+  - Suggest/Confirm Workflow für Learned Tags
+  - REST API Endpoints unter `/api/v1/tags2`
+
+### Files changed
+- `ha-copilot-repo/addons/copilot_core/rootfs/usr/src/app/copilot_core/tags/__init__.py` (NEW: 15134 bytes)
+- `ha-copilot-repo/addons/copilot_core/rootfs/usr/src/app/copilot_core/tags/api.py` (NEW: 11679 bytes)
+- `ha-copilot-repo/addons/copilot_core/rootfs/usr/src/app/copilot_core/core_setup.py` (+Tag System Integration)
+- `ha-copilot-repo/addons/copilot_core/rootfs/usr/src/app/tests/test_tags_v2.py` (NEW: 7399 bytes)
+- `ha-copilot-repo/CHANGELOG.md` (+v0.4.14 entry)
+
+### Status
+- **✅ RELEASED**: https://github.com/GreenhillEfka/Home-Assistant-Copilot/releases/tag/v0.4.14
+- All py_compile checks passed
+- Functional tests verified
+
+### Next logical step
+- **HA Integration**: Tag Context Module (verbindet Tag System mit HA Entities)
+- **ODER**: Testing Suite v0.2 erweitern
+- **ODER**: Weather Integration Tests
+
+---
+
+## 2026-02-14 16:30 — Module Architecture Fix (autopilot) — ✅ RELEASED
+
+### What changed
+- **Module Architecture Fix v0.6.7**:
+  - Created `core/modules/module.py` with `CopilotModule` and `ModuleContext` base classes
+  - Fixed all 8 modules that were importing missing dependencies
+  - Removed unused `asdict` import from `unifi_module.py`
+  - All modules now compile successfully
+
+### Files changed
+- `custom_components/ai_home_copilot/core/modules/module.py` (NEW: 2455 bytes)
+- `custom_components/ai_home_copilot/core/modules/unifi_module.py` (-2 bytes)
+- `custom_components/ai_home_copilot/manifest.json` (version → 0.6.7)
+- `CHANGELOG.md` (+v0.6.7 entry)
+
+### Status
+- **✅ RELEASED**: https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.7
+- Branch: wip/module-unifi_module/20260209-2149
+- py_compile verified for all modules
+
+### Next logical step
+- **User Antworten auf P0/P1 Fragen** (Tag System decisions)
+- ODER: Tag System v0.2 Implementierung (basierend auf Decision Matrix Empfehlungen)
+- ODER: UniFi Module Data Collection Stub implementieren
 
 ---
 

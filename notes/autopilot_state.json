@@ -10,6 +10,22 @@
       "result": "released",
       "summary": "Token UX verbessert (v0.6.6)",
       "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.6"
+    },
+    {
+      "ts": "2026-02-14T16:30:00+01:00",
+      "kind": "module_architecture_fix",
+      "branch": "wip/module-unifi_module/20260209-2149",
+      "result": "released",
+      "summary": "Module Architecture Fix v0.6.7 (module.py base classes)",
+      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.7"
+    },
+    {
+      "ts": "2026-02-14T16:50:00+01:00",
+      "kind": "tag_system_v2",
+      "branch": "dev/autopilot-tag-system-v0.2",
+      "result": "released",
+      "summary": "Tag System v0.2 (Decision Matrix Implementation)",
+      "release_url": "https://github.com/GreenhillEfka/Home-Assistant-Copilot/releases/tag/v0.4.14"
     }
   ],
   "pending_questions": [
