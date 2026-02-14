@@ -8,36 +8,30 @@
       "kind": "kickstart",
       "branch": "dev/autopilot-2026-02-08-0641",
       "result": "committed",
-      "summary": "Track Autopilot notes + Tag-System spec; ignore nested HACS repo checkout",
-      "artifacts": [
-        "docs/TAG_SYSTEM_v0.1.md",
-        "notes/autopilot_log.md",
-        "notes/autopilot_state.json",
-        "notes/* (alpha_worker + perplexity_audit + questions)"
-      ]
+      "summary": "Track Autopilot notes + Tag-System spec; ignore nested HACS repo checkout"
     },
     {
       "ts": "2026-02-14T13:30:00+01:00",
       "kind": "consistency_fix",
       "branch": "release/v0.4.1",
       "result": "committed",
-      "summary": "Consistency fix: init_energy_api naming pattern",
-      "artifacts": [
-        "ha-copilot-repo/.../energy/api.py",
-        "ha-copilot-repo/.../core_setup.py"
-      ]
+      "summary": "Consistency fix: init_energy_api naming pattern"
     },
     {
       "ts": "2026-02-14T13:50:00+01:00",
       "kind": "feature_add",
       "branch": "release/v0.4.1",
-      "result": "committed",
+      "result": "released",
       "summary": "Brain Graph configurable limits (v0.4.12)",
-      "artifacts": [
-        "addons/copilot_core/config.json",
-        "addons/copilot_core/rootfs/usr/src/app/copilot_core/core_setup.py",
-        "CHANGELOG.md"
-      ]
+      "release_url": "https://github.com/GreenhillEfka/Home-Assistant-Copilot/releases/tag/v0.4.12"
+    },
+    {
+      "ts": "2026-02-14T13:49:00+01:00",
+      "kind": "feature_add",
+      "branch": "release/v0.4.1",
+      "result": "released",
+      "summary": "UniFi + Energy Neurons release (v0.4.13)",
+      "release_url": "https://github.com/GreenhillEfka/Home-Assistant-Copilot/releases/tag/v0.4.13"
     }
   ],
   "pending_questions": []

@@ -1,9 +1,9 @@
 # Debug Level Worker Report
-Generated: 2026-02-14 1:15 PM (Europe/Berlin)
+Generated: 2026-02-14 1:45 PM (Europe/Berlin)
 
 ---
 
-## 1. Ist-Zustand (Update)
+## 1. Ist-Zustand (keine Änderungen seit letztem Run)
 
 ### ✅ Bereits Implementiert
 
@@ -11,97 +11,102 @@ Generated: 2026-02-14 1:15 PM (Europe/Berlin)
 
 | Feature | Status | Location |
 |---------|--------|----------|
-| Debug Enable (30min Button) | ✅ | `button.py:CopilotEnableDebug30mButton` |
-| Debug Disable Button | ✅ | `button.py:CopilotDisableDebugButton` |
-| Clear Error Digest Button | ✅ | `button.py:CopilotClearErrorDigestButton` |
-| Services (enable/disebug/clear) | ✅ | `core/modules/dev_surface.py` |
+| Debug Enable (30min Button) | ✅ | `button.py:CopilotEnableDebug30mButton` (L796) |
+| Debug Disable Button | ✅ | `button.py:CopilotDisableDebugButton` (L823) |
+| Clear Error Digest Button | ✅ | `button.py:CopilotClearErrorDigestButton` (L850) |
+| Services (enable/disable/clear) | ✅ | `core/modules/dev_surface.py` |
 | Kernel State (devlog, errors, debug) | ✅ | `core/modules/dev_surface.py:_get_kernel()` |
 | DevLogBuffer + ErrorDigest | ✅ | `core/modules/dev_surface.py` |
-| OptionsFlow (devlog_push) | ✅ | `config_flow.py` |
+| OptionsFlow (devlog_push) | ✅ | `config_flow.py` (L396+) |
 | Diagnostics Export | ✅ | `diagnostics.py` |
+| Select-Entities (Media Context) | ✅ | `select.py` (Zone, ManualTarget) |
 
 **Core Add-on (ha-copilot-repo):**
 
 | Feature | Status | Location |
 |---------|--------|----------|
 | DevSurfaceService | ✅ | `copilot_core/dev_surface/service.py` |
-| Ring Buffer (500 Einträge) | ✅ | `service.py:DevSurfaceService` |
+| Ring Buffer (500 Einträge) | ✅ | `service.py` |
 | Log Persistence (`/data/dev_logs.jsonl`) | ✅ | `service.py` |
 | API Endpoints (logs, errors, health) | ✅ | `copilot_core/dev_surface/api.py` |
 | Error Summary + System Health | ✅ | `service.py` |
 
-### ⚠️ Noch Offen (aus letztem Report)
+### ⚠️ Noch Offen
 
-| Feature | Priorität | Status |
-|---------|-----------|--------|
-| **Select-Entity: Diagnostic Mode** | Kurzfristig | ❌ Fehlt |
-| **Clear All Logs Button** | Kurzfristig | ❌ Fehlt |
-| **Log-Level Dropdown (OptionsFlow)** | Mittelfristig | ❌ Fehlt |
-| **Copy Diagnostics Button** | Mittelfristig | ❌ Fehlt |
-| **HA Logger Integration** | Langfristig | ❌ Fehlt |
+| Feature | Priorität | Aufwand | Status |
+|---------|-----------|---------|--------|
+| **Select-Entity: Diagnostic Mode** | Kurzfristig | ~2h | ❌ Fehlt |
+| **Clear All Logs Button** | Kurzfristig | ~1h | ❌ Fehlt |
+| **Log-Level Dropdown (OptionsFlow)** | Mittelfristig | ~2h | ❌ Fehlt |
+| **Copy Diagnostics Button** | Mittelfristig | ~1h | ❌ Fehlt |
+| **HA Logger Integration** | Langfristig | ~3h | ❌ Fehlt |
 
 ---
 
-## 2. Repo-Status
+## 2. Repo-Status (unverändert)
 
 ### ai_home_copilot_hacs_repo
 ```
 Branch: main
-Status: Uncommitted changes in docs/PROJECT_PLAN.md
-Letzter Commit: 46b7924 (🧪 Option C: HA Integration Test Suite v0.5.8)
+Uncommitted: docs/PROJECT_PLAN.md (modified)
+HEAD: 46b7924 — 🧪 Option C: HA Integration Test Suite (v0.5.8)
 ```
 
 ### ha-copilot-repo
 ```
 Branch: release/v0.4.1
-Status: Clean working tree
-Letzter Commit: 98dd7b2 (Energy Neuron v0.4.11)
+Status: Clean
+HEAD: 00eed6e — feat: Brain Graph configurable limits (v0.4.12)
 ```
 
 ---
 
-## 3. Empfohlene Tasks (dieser Run)
+## 3. Analyse: Nächster sinnvoller Schritt
 
-### Task 1: Select-Entity für Diagnostic Mode
-```
-File: custom_components/ai_home_copilot/select.py
-File: custom_components/ai_home_copilot/const.py (CONF_DIAGNOSTIC_MODE)
-File: custom_components/ai_home_copilot/config_flow.py (OptionsFlow)
+### Empfehlung: **Diagnostic Mode Select-Entity** (Top-Priorität)
 
-Options:
-- "off" (default)
-- "light" (INFO+)
-- "full" (DEBUG, 30min auto-disable)
+**Warum:** Die vorhandenen Debug-Buttons sind binär (an/aus). Ein Select-Entity mit Stufen (`off` / `light` / `full`) gibt dem User feinere Kontrolle und ist in HA-Dashboards nativ darstellbar.
 
-Erwarteter Aufwand: ~2h
-```
+**Implementierungsplan:**
 
-### Task 2: Clear All Logs Button
-```
-File: custom_components/ai_home_copilot/button.py (CopilotClearAllLogsButton)
-Backend: POST /api/v1/dev/clear + DevLogBuffer.clear()
+1. **`const.py`** — Neue Konstanten:
+   ```python
+   CONF_DIAGNOSTIC_MODE = "diagnostic_mode"
+   DIAGNOSTIC_MODES = ["off", "light", "full"]
+   ```
 
-Erwarteter Aufwand: ~1h
-```
+2. **`select.py`** — Neue `DiagnosticModeSelectEntity`:
+   - Options: `off`, `light` (INFO+), `full` (DEBUG, auto-disable nach Timer)
+   - Liest/schreibt DevSurface-State via Coordinator
+   - `full` triggert bestehende 30min-Timer-Logik
+
+3. **`select.py:async_setup_entry`** — Entity registrieren (neben Media-Selects)
+
+4. **`config_flow.py`** — Optional: Default-Mode in OptionsFlow
+
+**Abhängigkeiten:** Keine — bestehende DevSurface-Infrastruktur reicht.
+
+### Zweit-Empfehlung: **Clear All Logs Button**
+
+Trivial: Neuer `CopilotClearAllLogsButton` in `button.py`, ruft DevSurface `.clear_all()` auf.
 
 ---
 
-## 4. Offene Fragen (unchanged)
+## 4. Offene Fragen (an User)
 
 1. **Mode-Naming:** "Diagnostic Mode" vs "Debug Level" vs "Verbosity"?
-2. **Default-Level:** INFO oder WARN für Production?
-3. **Timer-Länge:** 15min, 30min, oder einstellbar?
-4. **Persistenz:** Im RAM (current) oder in Options (restart-sicher)?
-5. **UI-Vorschau:** Soll PilotSuite den aktuellen Mode anzeigen?
+2. **Default-Level:** `off` oder `light` (INFO) für Production?
+3. **Auto-Disable Timer:** Fix 30min oder konfigurierbar (15/30/60)?
+4. **Persistenz:** RAM-only (current) oder restart-sicher (Options)?
+5. **PilotSuite:** Soll der aktuelle Mode dort angezeigt werden?
 
 ---
 
-## 5. Quick Wins (falls Zeit)
+## 5. Status
 
-- **Documentation:** `docs/debug_mode_guide.md` erstellen
-- **Test Coverage:** Unit-Tests für `DevSurfaceModule` erweitern
-- **Error Registry:** Neue Error-Codes für häufige Fehler hinzufügen
+**Keine neuen Tasks im Command-File.** Repos unverändert seit 12:45.
+Nächster Run: ~2:15 PM. Bei Tasks → `notes/debug_level_worker_command.md` beschreiben.
 
 ---
 
-*Report generiert von Debug Level Worker (cron:f84e4b7d-c40f-46b3-8dad-ba598e15ccf5)*
+*Worker: cron:f84e4b7d-c40f-46b3-8dad-ba598e15ccf5 | Lauf 3 (14.02.2026)*
