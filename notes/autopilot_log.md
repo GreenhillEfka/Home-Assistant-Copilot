@@ -6,7 +6,35 @@ This log is appended by the Autopilot cron.
 
 ---
 
-## 2026-02-14 14:29 — Debug Level Control Release (autopilot)
+## 2026-02-14 14:39 — UniFi Context Module Release (autopilot)
+
+### What changed
+- **UniFi Context Module v0.6.1** released for HA Integration
+- **6 new sensor entities** for network monitoring:
+  - `sensor.ai_home_copilot_unifi_clients_online` (online clients count)
+  - `sensor.ai_home_copilot_unifi_wan_latency` (WAN latency in ms)
+  - `sensor.ai_home_copilot_unifi_packet_loss` (WAN packet loss %)
+  - `binary_sensor.ai_home_copilot_unifi_wan_online` (connectivity)
+  - `binary_sensor.ai_home_copilot_unifi_roaming` (roaming activity)
+  - `sensor.ai_home_copilot_unifi_wan_uptime` (human-readable uptime)
+- Connects Core Add-on UniFi Neuron v0.4.10 to HA Integration
+
+### Files changed
+- `custom_components/ai_home_copilot/unifi_context.py` (+coordinator)
+- `custom_components/ai_home_copilot/unifi_context_entities.py` (+6 entities)
+- `custom_components/ai_home_copilot/core/modules/unifi_context_module.py` (+module)
+- `custom_components/ai_home_copilot/__init__.py` (+unifi_context module registration)
+- `custom_components/ai_home_copilot/manifest.json` (version → 0.6.1)
+- `CHANGELOG.md` (+v0.6.1 entry)
+
+### Status
+- **✅ RELEASED**: https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.1
+- All py_compile checks passed
+- Branch pushed: development
+
+### Next logical step
+- Weather Integration für PV forecasting (Energy follow-up)
+- Or: Tag System implementation (pending user answers)
 
 ### What changed
 - **Debug Level Control (v0.6.0)** released for HA Integration

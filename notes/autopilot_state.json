@@ -48,6 +48,14 @@
       "result": "released",
       "summary": "Debug Level Control (v0.6.0)",
       "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.0"
+    },
+    {
+      "ts": "2026-02-14T14:39:00+01:00",
+      "kind": "feature_add",
+      "branch": "development",
+      "result": "released",
+      "summary": "UniFi Context Module — Connect Core UniFi Neuron to HA Integration (v0.6.1)",
+      "release_url": "https://github.com/GreenhillEfka/ai-home-copilot-ha/releases/tag/v0.6.1"
     }
   ],
   "pending_questions": [
