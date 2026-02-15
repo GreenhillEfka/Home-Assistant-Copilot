@@ -158,6 +158,23 @@ Der Habitus beobachtet Events und lernt **Verhaltensmuster**:
 - Aus Mustern werden **Automationsvorschläge**
 - **Niemals automatisch aktiv** – User muss bestätigen
 
+### 4.1.1 Wichtige Design-Entscheidung: Manuelle Entity-Auswahl
+
+**Entities werden MANUELL bei der Installation ausgewählt:**
+- Wenn ein Habitus-Bereich hinzugefügt wird, wählt der User die relevanten Entities aus
+- **Nur diese manuell ausgewählten Entities** werden für die Auswertung herangezogen
+- Das macht das System zu Beginn **übersichtlicher** und vermeidet Rauschen
+
+**Aktuelles Beispiel:**
+- Aktuell ist nur **Wohnbereich** als Habitus-Zone für die Entwicklung definiert
+- Weitere Zones können später ergänzt werden
+
+**Begründung:**
+1. **Übersichtlichkeit** - nur relevante Entities pro Zone
+2. **Privacy-First** - keine automatisierte Entity-Erkennung
+3. **User-Kontrolle** - User entscheidet was relevant ist
+4. **Entwicklungsimplizität** - klares, bekanntes Set für Tests
+
 ### 4.2 MVP Pattern-Detection
 
 ```

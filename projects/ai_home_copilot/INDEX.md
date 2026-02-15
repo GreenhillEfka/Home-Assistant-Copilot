@@ -1,50 +1,44 @@
 # AI Home CoPilot - INDEX.md
 
 ## Last Updated
-2026-02-15 00:48
+$(date '+%Y-%m-%d %H:%M')
 
 ## Project Status
 
 | Metric | Value |
 |--------|-------|
 | Branch | development |
-| Version | v0.7.3 |
-| Modules | 15+ (modular) |
-| Done | 11/15 (73%) |
+| Version | v0.7.0 |
+| Modules | 22 total |
+| Done | 12 (55%) |
 
 ## Active Tasks
 
 | Task | Status | Priority | Assignee |
 |------|--------|----------|-----------|
-| Interactive Brain Graph Panel | planned | low | Future |
-| Multi-user preference learning | planned | medium | Future |
-| Cross-home pattern sharing | planned | low | Future |
+| Habitus Zones v2 | in-progress | high | Project Agent |
+| Habitus Dashboard Cards | in-progress | medium | Project Agent |
+| Brain Graph v2 | in-progress | high | Task Worker |
 
-## Completed Today (2026-02-15)
+## Completed Today
 
-- ✅ Workspace Sync (00:52)
-- ✅ Cron Job Status Review
-- ✅ PROJECT_PLAN.md complete (M0-M3 done)
-- ✅ Core v0.4.15 ↔ HA v0.7.3 sync confirmed
+- [x] Habitus Miner Bug Fixes
+- [x] Candidates Store Merge
+- [x] Architecture Fixes
+- [x] v0.7.0 Release
 
-## Completed (v0.7.3 - 2026-02-14)
+## Next Steps
 
-- ✅ Habitus Dashboard Cards v0.1 (Lovelace UI)
-- ✅ Habitus Zones v2 Wizard UI
-- ✅ Brain Graph Viz v0.1 (HTML/SVG)
-- ✅ Modular Runtime Architecture v0.1 (v0.7.0)
-- ✅ All Milestones M0-M3 complete
-
-## Completed (v0.7.2 - 2026-02-14)
-
-- ✅ Habitus Zones v2 Wizard UI (Config Flow)
-- ✅ Dashboard Generation + Publishing
+1. Habitus Zones v2 Implementation
+2. Dashboard Cards Integration
+3. Brain Graph v2 Testing
+4. v0.7.1 Release Prep
 
 ## Dependencies
 
-- Core Add-on v0.4.15
+- Core Add-on v0.4.x
 - Brain Graph v2
-- Neurons Architecture (Mood, Energy, UniFi, SystemHealth)
+- Neurons Architecture
 
 ## Notes
 
