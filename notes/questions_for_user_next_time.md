@@ -109,3 +109,15 @@
 
 *Autopilot Run: 2026-02-14 14:49*
 *Decision Matrix Basis: Run #7 (2026-02-14 14:20)*
+
+---
+
+## P3 — Aktueller Stand (2026-02-15)
+
+**Status:** Keine neuen Fragen nach Deep-Audit.
+
+**Offene P0-Items (Decision Matrix #10):**
+1. Fix `BrainGraphStore` → `GraphStore` (provider.py)
+2. Convert `tags/api.py` von aiohttp zu Flask
+
+**Sicherheit:** CRITICAL-issues in `log_fixer_tx.py` (Auth + path validation) erfordern schnelle Korrektur.
