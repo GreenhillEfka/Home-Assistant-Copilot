@@ -1,14 +1,14 @@
 {
-  "last_run": "2026-02-15T05:40:00+01:00",
-  "last_check": "2026-02-15T05:40:00+01:00",
-  "current_task": "rag_neo4j_knowledge_graph",
-  "task_status": "running",
-  "task_model": "codex (gpt-5.2)",
+  "last_run": "2026-02-15T05:50:00+01:00",
+  "last_check": "2026-02-15T05:50:00+01:00",
+  "current_task": null,
+  "task_status": "completed",
+  "task_model": "glm-5:cloud",
   "task_retry_count": 0,
   "task_error": null,
   "worker_session": null,
   "worker_pid": null,
-  "last_action": "2026-02-15T05:40:00+01:00 - Starting RAG/Neo4j Knowledge Graph implementation",
+  "last_action": "2026-02-15T05:50:00+01:00 - Released v0.8.2 (HA Integration) + v0.4.18 (Core Add-on)",
   "previous_tasks": [
     {
       "name": "interactive_brain_graph_panel",
@@ -27,28 +27,29 @@
     },
     {
       "name": "mupl_phase2_action_attribution",
-      "status": "completed",
+      "status": "released",
       "version": "v0.8.1",
-      "commit": "904506d",
-      "completed_at": "2026-02-15T04:50:00+01:00"
-    },
-    {
-      "name": "performance_optimization",
-      "status": "completed",
-      "version": "v0.8.1",
-      "commit": "d8f80f1",
-      "completed_at": "2026-02-15T05:00:00+01:00"
+      "commit": "8e89497",
+      "released_at": "2026-02-15T05:50:00+01:00"
     },
     {
       "name": "openapi_spec",
-      "status": "completed",
-      "version": "v0.8.2 / v0.4.17",
-      "commit": "baa59ea / 202cd4c",
-      "completed_at": "2026-02-15T05:35:00+01:00"
+      "status": "released",
+      "version": "v0.8.2",
+      "commit": "30efdc7",
+      "released_at": "2026-02-15T05:50:00+01:00"
+    },
+    {
+      "name": "knowledge_graph",
+      "status": "released",
+      "version": "v0.4.18",
+      "commit": "0e0f3da",
+      "released_at": "2026-02-15T05:50:00+01:00",
+      "github_url": "https://github.com/GreenhillEfka/Home-Assistant-Copilot/releases/tag/v0.4.18"
     }
   ],
   "next_task": "vector_store_integration",
-  "branch": "dev/rag-neo4j-v0.9.0",
-  "created": "2026-02-15T05:40:00+01:00",
+  "branch": "main",
+  "created": "2026-02-15T05:50:00+01:00",
   "pending_release": false
 }
