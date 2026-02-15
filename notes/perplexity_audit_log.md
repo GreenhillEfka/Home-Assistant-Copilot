@@ -1,79 +1,126 @@
 # Perplexity Deep Audit Log - AI Home CoPilot
 
-## Audit vom 2026-02-15 05:30
+## Audit vom 2026-02-15 12:36 CET
 
-### Recherche: Home Assistant Trends 2025-2026
+### Recherche: Home Assistant Trends 2025/2026
 
-#### Neue HA-Features (2026.1-2026.2)
-1. **Verbesserte Mobile Dashboards** - Summary Cards für schnellen Status-Überblick
-2. **Devices-Übersicht** - Zentrale Geräteverwaltung
-3. **Neue Triggers** - Button-Druck, Klima-Änderungen, Device-Tracker, Humidifier, Light-Helligkeit, Lock-Zustände, Scene-Aktivierung
-4. **Purpose-specific Triggers** - Natürlichere Logik via HA Labs (z.B. "Tür ist verschlossen")
-5. **Quick Search** - Ctrl+K für schnelle Navigation
-
-#### Emerging Automation Patterns
-- **Presence-based Automations** - Device-Tracker für Ankunfts-Routinen
-- **Purpose-specific Logic** - Natürlichere Sprache statt YAML-Komplexität
-- **Geräte-zentrierte Triggers** - Feinere Kontrolle für kontextuelle Szenarien
-
-#### AI/LLM-Integration
-- **OpenAI-Unterstützung** - GPT-5.2 mit "xhigh"-Reasoning
-- **Anthropic-Integration** - AI-Tasks in Templates
-- **Lokale LLMs** - Trend zu lokalen, smarten Automatisierungen
-
-#### Privacy-first Approaches
-- Open-source und lokal - Keine Cloud-Pflicht
-- Zigbee, Z-Wave, Thread für direkte Gerätekontrolle
-- Lokale Energy-Monitoring und NVR-Support
-
-### Vergleich mit AI Home CoPilot Stand
-
-#### ✅ Bereits implementiert
-| Feature | Status | Entsprechung |
-|---------|--------|--------------|
-| Mood-System | ✅ v0.8.0 | Kontext-bewertete Vorschläge |
-| Tag System | ✅ v0.2 | Entity-Klassifizierung |
-| Habitus Zones | ✅ v2 | Zonen-basierte Muster |
-| Brain Graph | ✅ v0.7.6 | Neuronen-Visualisierung |
-| Multi-User Learning | ✅ v0.8.0 | Per-user Präferenzen |
-| Energy Context | ✅ v0.5.9 | PV/Verbrauch |
-| UniFi Context | ✅ v0.6.1 | Netzwerk-Kontext |
-| Weather Context | ✅ v0.6.2 | Wetter/PV-Prognose |
-| Debug Mode | ✅ v0.6.0 | Diagnose-Ebene |
-| Repairs UX | ✅ v0.5.1 | Feedback-Loop |
-
-#### 🔄 Trends vs. CoPilot Positionierung
-
-| HA Trend 2026 | CoPilot Ansatz | Alignment |
-|---------------|----------------|-----------|
-| Purpose-specific Triggers | Mood-bewertete Vorschläge | ✅ Komplementär |
-| Presence-based Automations | Habitus Zones + Pattern Mining | ✅ Vorreiter |
-| AI/LLM Integration | Core Add-on mit Ollama | ✅ Lokal-first |
-| Privacy-first | Keine Cloud-Pflicht, lokal | ✅ Konsistent |
-| Summary Cards | Brain Graph Dashboard | ✅ Ähnlich |
-
-#### 🆕 Potentielle Erweiterungen (basierend auf Trends)
-1. **Quick Search Integration** - Ctrl+K für CoPilot Vorschläge
-2. **Purpose-specific Trigger Bridge** - CoPilot Vorschläge nutzen HA Labs Syntax
-3. **Device-Tracker Neuron** - Presence-basierte Mood-Anpassung
-4. **Summary Card Generator** - Auto-generierte CoPilot Dashboard Cards
-5. **Energy Water Monitoring** - Wasser-Verbrauch zum Energy Module
-
-### Bewertung
-
-**AI Home CoPilot ist gut positioniert:**
-- Privacy-first Ansatz passt zu HA-Philosophie
-- Mood-basierte Vorschläge gehen über purpose-specific triggers hinaus
-- Pattern Mining (Habitus) ist Vorreiter gegenüber HA's nativen Automations
-- Multi-User Learning adressiert echte HA-Schwachstelle
-
-**Empfehlung:**
-- Weiter auf lokale, kontext-bewusste Vorschläge fokussieren
-- HA Labs Integration prüfen (purpose-specific triggers als CoPilot-Output-Format)
-- Device-Tracker Neuron für Presence-basierte Muster
+**Quellen:**
+- Home Assistant Blog (2025.8 Release, Roadmap 2025H1, 2026.2 Release)
+- InfluxData Blog (9 Home Assistant Integrations)
+- Community Discussions
 
 ---
 
-## Audit vom 2026-02-15 05:00 (vorangehend)
+### Gefundene Trends
 
-*(Keine Einträge - erste Aufzeichnung)*
+#### 1. AI-Integration & LLM-Unterstützung
+- **AI Tasks und Suggest with AI** (seit 2025.8): Streaming TTS, Kameranalyse, Benachrichtigungen
+- **OpenRouter Integration**: Einheitliche API für 400+ LLMs
+- **Collective Intelligence**: Roadmap für proaktive Automatisierungen via Kontext
+
+#### 2. Lokale Voice-Assistenten
+- **Assist-Verbesserungen**: Kontextbasierte Sensorenauswahl (z.B. Küchentemperatur ignoriert Gefrierer)
+- **Konversationell**: Bestätigung/Abfrage-Dialoge
+- **Lokale LLMs priorisiert** für Datenschutz
+
+#### 3. Privacy-First Best Practices
+- Kein Big-Tech-Scraping
+- Community-Intelligence statt Cloud
+- Erweiterte Privacy-Controls für User/Gäste
+- Time-Series-DBs (InfluxDB/Grafana) für datengetriebene Automatisierung
+
+#### 4. Automation Patterns
+- Intelligente Vorschläge (z.B. offene Kühlschranktür-Erkennung)
+- Revampierte Triggers/Conditions
+- UI-Support für Cover, Fan, Light Plattformen
+
+---
+
+### Vergleich mit AI Home CoPilot (v0.8.10)
+
+| Feature | HA Trend | CoPilot Status | Gap? |
+|---------|----------|----------------|------|
+| **Neuronales System** | Context/Awareness | ✅ Implementiert (Context/State/Mood Neuronen) | Nein |
+| **Privacy-First** | Lokale Verarbeitung | ✅ Implementiert (keine Cloud, lokale API) | Nein |
+| **Vorschlags-basiert** | Suggest with AI | ✅ Implementiert (Repairs + Blueprints) | Nein |
+| **Multi-User Learning** | User Profiles | ✅ Implementiert (MUPL v0.8.0) | Nein |
+| **Tag System** | Entity Classification | ✅ Implementiert (v0.2) | Nein |
+| **Pattern Mining** | Habitus Zones | ✅ Implementiert (v2) | Nein |
+| **Context Modules** | Weather/Energy/Network | ✅ Implementiert (Weather, Energy, UniFi) | Nein |
+| **Brain Graph** | Visualisierung | ✅ Implementiert (v0.7.6 Interactive Panel) | Nein |
+| **Voice Assistant** | Assist Integration | ⚠️ Nicht implementiert | Ja |
+| **Kameranalyse** | AI Vision Tasks | ⚠️ Nicht implementiert | Ja |
+| **OpenRouter LLM** | 400+ LLMs via API | ⚠️ Nicht implementiert (nur Ollama) | Ja |
+| **Collective Intelligence** | Community Patterns | ⚠️ Nicht implementiert | Ja |
+| **Matter Protocol** | Smart Home Standard | ⚠️ Nicht spezifisch | Ja |
+
+---
+
+### Neue Erkenntnisse
+
+#### 1. **Voice-Assistent-Integration (HIGH VALUE)**
+- HA 2025.8 hat kontextbasierte Sensorenauswahl für Assist
+- CoPilot könnte Mood-Kontext an Assist weitergeben
+- **Potenzielles Feature**: `sensor.ai_copilot_mood` → Assist Context
+
+#### 2. **LLM-Erweiterung via OpenRouter**
+- CoPilot nutzt aktuell Ollama (lokale Modelle)
+- OpenRouter bietet 400+ Modelle (auch Cloud)
+- **Potenzielles Feature**: Hybrid-Modell (lokal + Cloud für komplexe Tasks)
+
+#### 3. **Kameranalyse-Integration**
+- HA 2025.8 AI Tasks für Kameranalyse
+- CoPilot könnte Security-Context erweitern
+- **Potenzielles Feature**: Security-Neuron mit Kamera-Events
+
+#### 4. **Collective Intelligence**
+- HA Roadmap erwähnt Community-Patterns
+- CoPilot hat Pattern Mining, aber isoliert
+- **Potenzielles Feature**: Anonymisierte Pattern-Sharing (optional)
+
+#### 5. **Suggest with AI Synergie**
+- HA 2025.8 "Suggest with AI" für Automatisierungen
+- CoPilot hat ähnlichen Ansatz (Habitus → Vorschläge)
+- **Synergie**: CoPilot Patterns → HA AI Suggestions
+
+---
+
+### Empfehlungen
+
+#### Kurzfristig (Phase 2)
+1. **Voice Context Integration**: Mood-Sensor für Assist bereitstellen
+2. **Weather Context Enhancement**: PV-Prognosen mit HA Energy integrieren
+
+#### Mittelfristig (Phase 3)
+1. **OpenRouter Integration**: Zusätzliche LLM-Optionen für User
+2. **Camera Context Neuron**: Security-Erweiterung mit HA AI Tasks
+
+#### Langfristig (Phase 4)
+1. **Collective Intelligence**: Optionale Pattern-Sharing-Community
+2. **Matter Protocol Support**: Zukünftige Smart-Home-Geräte
+
+---
+
+### Fazit
+
+Der AI Home CoPilot ist **sehr gut positioniert** im aktuellen Home Assistant Ökosystem:
+- ✅ Privacy-First Ansatz entspricht HA-Philosophie
+- ✅ Neuronales System ist innovativ und einzigartig
+- ✅ Vorschlags-basierter Ansatz aligniert mit HA "Suggest with AI"
+- ✅ Multi-User Learning ist ein Differenzierungsmerkmal
+
+**Größte Chancen:**
+- Integration mit HA Voice/Assist
+- OpenRouter für mehr LLM-Flexibilität
+- Kameranalyse für Security-Context
+
+---
+
+### Nächster Audit
+- Intervall: Stündlich
+- Fokus: Neue HA Releases, Community Patterns, AI/LLM Updates
+
+---
+
+*Audit durchgeführt von: AI Home CoPilot Autopilot*
+*Modell: Perplexity sonar-reasoning-pro*
