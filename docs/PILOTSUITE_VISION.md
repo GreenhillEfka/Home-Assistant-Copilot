@@ -362,12 +362,19 @@ Der Chat ist:
 
 ---
 
-## 14. Offene Design-Entscheidungen
+## 14. Design-Entscheidungen (2026-02-15 entschieden)
 
-1. Event-Transport: HA → Core Push (Webhooks) vs. Core → HA WebSocket (LLAT)
-2. Token: X-Auth-Token überall (API + Webhook callbacks)
-3. Automation-Erstellung: Blueprint-only vs. 1-Klick-Create
-4. Scope-Modell: global vs. area/person-spezifisch
+| Entscheidung | Wahl | Begründung |
+|--------------|------|------------|
+| **Event-Transport** | WebSocket | Bidirektional, Real-time, HA-pushed Events, passt zu neuronalem System |
+| **Automation-Erstellung** | Beides | Blueprints für komplexe Automations + 1-Klick-Create für einfache Vorschläge |
+| **Scope-Modell** | Area/Person-spezifisch | Nutzt vorhandenes MUPL (v0.8.0) und Habitus Zones (v2) |
+| **Token** | X-Auth-Token | Überall (API + Webhook callbacks) |
+
+### Implementierung Scope-Modell
+```
+Vorschlag → Scope prüfen (area/person) → MUPL-Gewichtung → Personalisierter Vorschlag
+```
 
 ---
 
