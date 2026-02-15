@@ -264,7 +264,14 @@ v0.MAJOR.MINOR
 - PATCH: Bugfixes
 
 ### Release-Kommunikation
-**NIE automatisch releasen ohne User-Bestätigung!**
+**Automatisch wenn:**
+- Code frei geprüft (Tests grün, Review ok)
+- Home Assistant Docs konform (https://www.home-assistant.io/docs/)
+- CHANGELOG aktualisiert
+
+**Manuell bei:**
+- Breaking Changes
+- Security-relevanten Änderungen
 
 ---
 
