@@ -89,13 +89,23 @@ class FederatedLearner:
             timestamp=time.time()
         )
 
-        # Register update
-        if node_id in self.active_rounds:
-            active_round = self.active_rounds[node_id]
+        # Register update - find the active round
+        # If there's only one active round, use it; otherwise create/update current
+        if len(self.active_rounds) == 1:
+            # Single active round case
+            active_round = list(self.active_rounds.values())[0]
             if active_round.model_version == model_version:
                 active_round.updates.append(update)
                 if node_id not in active_round.participating_nodes:
                     active_round.participating_nodes.append(node_id)
+        else:
+            # Multiple active rounds - find by round_id or use latest
+            for active_round in self.active_rounds.values():
+                if active_round.model_version == model_version:
+                    active_round.updates.append(update)
+                    if node_id not in active_round.participating_nodes:
+                        active_round.participating_nodes.append(node_id)
+                    break
 
         return update
 

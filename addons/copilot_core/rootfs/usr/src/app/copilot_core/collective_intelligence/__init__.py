@@ -16,13 +16,14 @@ Features:
 from .service import CollectiveIntelligenceService
 from .federated_learner import FederatedLearner
 from .model_aggregator import ModelAggregator
-from .privacy_preserver import PrivacyPreserver
+from .privacy_preserver import DifferentialPrivacy, PrivacyAwareAggregator
 from .knowledge_transfer import KnowledgeTransfer
 
 __all__ = [
     "CollectiveIntelligenceService",
     "FederatedLearner",
     "ModelAggregator",
-    "PrivacyPreserver",
+    "DifferentialPrivacy",
+    "PrivacyAwareAggregator",
     "KnowledgeTransfer",
 ]

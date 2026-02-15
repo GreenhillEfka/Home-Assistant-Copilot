@@ -117,6 +117,7 @@ class TestFederatedLearner:
         """Test submitting model updates."""
         learner = FederatedLearner()
         learner.register_participant("home-001")
+        learner.start_round()  # Need to start a round first
 
         update = learner.submit_update(
             "home-001",
@@ -125,16 +126,17 @@ class TestFederatedLearner:
         )
 
         assert update is not None
-        assert len(learner.rounds[0].updates) == 1
+        assert len(learner.active_rounds) == 1
+        round_obj = list(learner.active_rounds.values())[0]
+        assert len(round_obj.updates) == 1
 
     def test_aggregation_fed_avg(self):
         """Test federated averaging aggregation."""
         learner = FederatedLearner()
+        round_obj = learner.start_round()
         learner.register_participant("home-001")
         learner.register_participant("home-002")
         learner.register_participant("home-003")
-
-        round_obj = learner.start_round()
 
         # Submit updates with known values
         learner.submit_update("home-001", {"weight": 1.0})
@@ -144,7 +146,7 @@ class TestFederatedLearner:
         # Aggregate
         aggregated = learner.aggregate(round_obj.round_id)
 
-        assert aggregated is not None
+        assert aggregated is not None, f"Expected aggregated model, got None. Updates: {round_obj.updates}"
         assert aggregated.weights["weight"] == 2.0  # Mean of 1,2,3
 
     def test_min_participants_requirement(self):
@@ -227,11 +229,13 @@ class TestPrivacyPreserver:
         """Test Gaussian noise addition on arrays."""
         dp = DifferentialPrivacy(epsilon=1.0, delta=1e-5)
 
-        values = [1.0, 2.0, 3.0]
+        import numpy as np
+        values = np.array([1.0, 2.0, 3.0])
         noisy = dp.add_gaussian_noise(values, sensitivity=1.0)
 
         assert len(noisy) == 3
-        assert not all(n == v for n, v in zip(noisy, values))
+        # With very high probability, at least one value is different
+        assert any(abs(n - v) > 0.001 for n, v in zip(noisy, values))
 
     def test_privacy_budget(self):
         """Test privacy budget tracking."""
@@ -305,14 +309,23 @@ class TestKnowledgeTransfer:
         """Test transfer rate limiting."""
         transfer = KnowledgeTransfer(max_transfer_rate=2)
 
-        knowledge = transfer.extract_knowledge("home-001", "test", {}, confidence=0.9)
+        # Need unique payloads for each transfer due to deduplication
+        payload1 = {"pattern": "transfer1"}
+        payload2 = {"pattern": "transfer2"}
 
-        # First two transfers should succeed
-        assert transfer.transfer_knowledge(knowledge.knowledge_id, "home-002")
-        assert transfer.transfer_knowledge(knowledge.knowledge_id, "home-003")
+        k1 = transfer.extract_knowledge("home-001", "test", payload1, confidence=0.9)
+        k2 = transfer.extract_knowledge("home-001", "test", payload2, confidence=0.9)
 
-        # Third should fail due to rate limit
-        assert not transfer.transfer_knowledge(knowledge.knowledge_id, "home-004")
+        # First transfer should succeed
+        assert transfer.transfer_knowledge(k1.knowledge_id, "home-002")
+
+        # Second transfer should also succeed (rate = 2)
+        assert transfer.transfer_knowledge(k2.knowledge_id, "home-002")
+
+        # Third transfer to same target should fail
+        payload3 = {"pattern": "transfer3"}
+        k3 = transfer.extract_knowledge("home-001", "test2", payload3, confidence=0.9)
+        assert not transfer.transfer_knowledge(k3.knowledge_id, "home-002")
 
 
 class TestCollectiveIntelligenceService:
@@ -350,12 +363,14 @@ class TestCollectiveIntelligenceService:
         service.register_node("home-001")
         service.register_node("home-002")
 
+        # Start round first
+        round_id = service.start_federated_round()
+
         # Submit updates
         service.submit_local_update("home-001", {"weights": [0.5, 0.3]})
         service.submit_local_update("home-002", {"weights": [0.4, 0.2]})
 
-        # Start and complete round
-        round_id = service.start_federated_round()
+        # Execute aggregation
         aggregated = service.execute_aggregation(round_id)
 
         assert aggregated is not None
@@ -393,7 +408,9 @@ class TestCollectiveIntelligenceService:
         round_id = service.start_federated_round()
         service.submit_local_update("home-001", {"weights": [0.5]})
         service.submit_local_update("home-002", {"weights": [0.3]})
-        service.execute_aggregation(round_id)
+
+        # Execute aggregation with the round ID
+        aggregated = service.execute_aggregation(round_id)
 
         stats = service.get_statistics()
 

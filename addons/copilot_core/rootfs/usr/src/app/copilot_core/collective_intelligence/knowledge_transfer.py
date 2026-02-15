@@ -92,6 +92,10 @@ class KnowledgeTransfer:
         if knowledge_id not in self.knowledge_base:
             return False
 
+        # Check rate limit BEFORE logging
+        if self._exceeds_rate_limit(target_node_id):
+            return False
+
         knowledge = self.knowledge_base[knowledge_id]
 
         # Log transfer
@@ -102,10 +106,6 @@ class KnowledgeTransfer:
             "timestamp": time.time(),
             "type": knowledge.knowledge_type
         })
-
-        # Check rate limit
-        if self._exceeds_rate_limit(target_node_id):
-            return False
 
         return True
 
