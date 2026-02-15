@@ -1,41 +1,55 @@
-# Autopilot Task Queue
+# Autopilot Task Queue - CLEANUP & COMPLETION
 
-## Active Tasks (Priority Order)
+## STOP BUILDING - START COMPLETING
 
-### 1. Interactive Brain Graph Panel (NEXT)
-**Status**: Ready to start
-**Model**: qwen3-coder-next:cloud (via Ollama) or Gemini CLI
-**Scope**: 
-- Interactive D3.js/Vis.js visualization
-- Replace static SVG with live graph
-- Zoom, pan, filter, search
-- Click nodes for entity details
-- Real-time updates via HA websocket
+### Task 1: Module Consolidation (NOW)
+**Problem:** mood/ + neurons/mood.py = REDUNDANT
+**Action:**
+- [ ] Move mood/__init__.py to neurons/mood.py imports
+- [ ] DELETE mood/ directory
+- [ ] DELETE tagging/ directory (tags/ behalten)
+- [ ] DELETE data/ directory
+- [ ] CONNECT synapses/ with neurons/manager.py
 
-**Files to create/modify**:
-- `ai_home_copilot_hacs_repo/custom_components/ai_home_copilot/www/brain_graph_panel.js`
-- `ai_home_copilot_hacs_repo/custom_components/ai_home_copilot/views/brain_graph_panel.py`
-- Update `brain_graph_viz.py` for JSON API
+### Task 2: Dashboard Completion (NOW)
+**Problem:** pilotesuite_dashboard.py hat keine Neuronen
+**Action:**
+- [ ] Add Neuron Panel (shows active neurons)
+- [ ] Add Mood Panel (shows mood state)
+- [ ] Add Suggestion Panel (shows suggestions)
+- [ ] Add Config Panel (entity assignment)
 
-### 2. Multi-User Preference Learning
-**Status**: Planned
-**Model**: TBD
-**Scope**: Learn preferences per user, not just global
+### Task 3: Config UI (NOW)
+**Problem:** Keine UI für Neuron-Konfiguration
+**Action:**
+- [ ] Add config_flow for neurons
+- [ ] Add options_flow for entity assignment
+- [ ] Document in docs/CONFIGURATION.md
 
-### 3. Performance Optimization
-**Status**: Planned
-**Scope**: Cache optimization, query reduction
+### Task 4: Tests (NOW)
+**Problem:** Keine Tests
+**Action:**
+- [ ] Test NeuronManager.evaluate()
+- [ ] Test API endpoints
+- [ ] Test HA Integration coordinator
 
-## Completed Tasks
-- v0.7.5: Entity ID sanitization, Habitus Dashboard Cards
-- v0.4.16: Core API auth fixes
-- v0.4.15: Habitus Zones v2
-- v0.4.14: Tag System v0.2
+### Task 5: Documentation (NOW)
+**Problem:** Dashboard/UX nicht dokumentiert
+**Action:**
+- [ ] docs/DASHBOARD.md
+- [ ] docs/NEURAL_SYSTEM.md
+- [ ] docs/CONFIGURATION.md
 
-## Release Workflow
-1. Complete task in dev branch
-2. Run tests
-3. Update CHANGELOG
-4. Ask user for release approval (Telegram)
-5. Merge to main, tag release
-6. Create GitHub release with notes
+---
+
+## KEIN "FERTIG" OHNE:
+
+1. ✅ Code geschrieben
+2. ✅ Integration funktioniert
+3. ✅ Tests geschrieben
+4. ✅ Dokumentiert
+5. ✅ GETESTET DASS ES WIRKLICH FUNKTIONIERT
+
+---
+
+## NO MORE LIES. COMPLETE IT.
