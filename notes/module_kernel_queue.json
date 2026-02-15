@@ -310,11 +310,18 @@
     {
       "module": "unifi_module",
       "spec": "docs/module_specs/unifi_module_v0.1.md",
-      "status": "merged_to_wip_branch",
+      "status": "completed",
       "priority": 1,
       "started_at": "2026-02-09T21:48:00+0100",
-      "merged_at": null,
-      "artifacts": {}
+      "merged_at": "2026-02-15T01:35:00+0100",
+      "completed_at": "2026-02-15T01:35:00+0100",
+      "artifacts": {
+        "report": "notes/module_kernel_reports/unifi_module_latest.md",
+        "repo_integration_branch": "development",
+        "repo_core_branch": "dev",
+        "src_branch": "wip/module-unifi_module/20260215-0135",
+        "note": "UniFiModule exported, test report committed, integration branch updated"
+      }
     }
   ]
 }
